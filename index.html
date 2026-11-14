@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WEIRD SCARS — electronic music producer and artist from Kazakhstan. Electro-Darkwave / Post-Witch House.">
+<title>WEIRD SCARS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ln:#1c2026;--mu:#8a9099;--bl:#7fb8ff;--rd:#c1121f;--mo:'JetBrains Mono',ui-monospace,Consolas,monospace;--hd:'Unbounded','Arial Black',sans-serif}
+*{box-sizing:border-box}
+html{background:#000;color:#fff;scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:Manrope,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+h1,h2{font-family:var(--hd);font-weight:800;margin:0;line-height:1.05}
+h2{font-size:clamp(24px,5vw,40px);margin-bottom:16px}
+.lab{font-family:var(--mo);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin:0 0 14px}
+.lede{margin:0;max-width:640px;color:#b8bec7;line-height:1.7}
+header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:12px;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--ln)}
+.logo{width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.brand{font-family:var(--hd);font-weight:800;font-size:14px;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0}
+nav{display:flex;gap:14px;margin-left:auto;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;font-family:var(--mo);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+nav::-webkit-scrollbar{display:none}
+nav a{text-decoration:none;color:var(--mu)}
+nav a:hover{color:#fff}
+.hero{position:relative;isolation:isolate;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px 20px 56px;overflow:hidden;max-width:none;border-top:0}
+#bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:-2;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.35),#000 95%)}
+.meta{position:absolute;top:84px;font-family:var(--mo);font-size:10px;letter-spacing:.16em;color:var(--mu);line-height:1.8}
+.ml{left:20px}
+.mr{right:20px;text-align:right;color:#fff}
+h1{font-size:clamp(28px,9.2vw,132px);white-space:nowrap}
+.sub{margin:18px 0 0;max-width:620px;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#b8bec7;line-height:1.7}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-block;padding:13px 20px;border:1px solid #fff;color:#fff;text-decoration:none;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:none;cursor:pointer;touch-action:manipulation}
+.btn:hover{background:#fff;color:#000}
+section{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:clamp(60px,10vw,96px) 20px;border-top:1px solid var(--ln)}
+.about{display:grid;gap:28px;align-items:center;overflow:hidden}
+.about::before{content:"";position:absolute;inset:0;z-index:-1;background:url(assets/artist.jpg) center/cover;filter:blur(28px) saturate(.6);opacity:.2;transform:scale(1.15)}
+.about img{width:100%;max-width:300px;justify-self:center;border:1px solid var(--ln);filter:grayscale(.3)}
+.st{display:grid;gap:10px;margin-top:26px}
+.st div{padding:14px;background:#050608;border:1px solid var(--ln)}
+.st b{display:block;font-family:var(--mo);font-size:11px;letter-spacing:.16em;font-weight:500;color:var(--bl)}
+.st span{display:block;margin-top:6px;color:#cfd5de}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:6px 2px 16px;margin-top:24px}
+.car::-webkit-scrollbar{display:none}
+.rc{flex:0 0 min(230px,70vw);scroll-snap-align:center;text-decoration:none;padding:10px;background:#050608;border:1px solid var(--ln);transition:border-color .3s,transform .4s}
+.rc img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:contrast(1.05)}
+.rc:hover{border-color:var(--bl);transform:translateY(-4px)}
+.rc b{display:block;margin-top:10px;font-family:var(--mo);font-size:12px;letter-spacing:.06em}
+.rc small{display:block;margin-top:4px;font-family:var(--mo);font-size:10px;letter-spacing:.12em;color:var(--mu)}
+.ctl{display:flex;gap:8px;margin-top:6px}
+.ctl button{padding:10px 14px;background:none;border:1px solid var(--ln);color:#fff;font-family:var(--mo);font-size:11px;letter-spacing:.14em;cursor:pointer;touch-action:manipulation}
+.ctl button:hover{border-color:#fff}
+.mq{overflow:hidden;white-space:nowrap;padding:14px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);background:#050608}
+.mqt{display:inline-flex;animation:mq 45s linear infinite;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#cfd5de}
+.mqt span{padding-right:28px}
+.mq:hover .mqt{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.cp{margin-top:22px;padding:18px;background:#050608;border:1px solid var(--ln);font-family:var(--mo);font-size:12px;line-height:1.7}
+.cp small{display:block;margin-top:12px;font-size:10px;letter-spacing:.2em;color:var(--mu)}
+.cp small:first-child{margin-top:0}
+.ds{height:105px;overflow:hidden;white-space:pre;color:#dfe6ef}
+details{word-break:break-all}
+details summary{cursor:pointer;color:var(--mu);font-family:var(--mo)}
+details span{color:var(--mu)}
+.rd{display:inline-block;width:12ch;height:1em;background:#fff;vertical-align:middle}
+.hs{word-break:break-all;color:var(--mu)}
+.term{margin-top:12px;padding:16px;background:#000;border:1px solid var(--rd);font-family:var(--mo);font-size:13px;line-height:1.55}
+.out{height:260px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.out p,.out pre{margin:0 0 6px;white-space:pre-wrap;word-break:break-word;color:#c9d0da}
+.out pre{color:var(--bl);line-height:1.15}
+.out p.e{color:var(--rd)}
+.out p.o{color:var(--bl)}
+.out a{color:var(--bl)}
+#tf{display:flex;align-items:center;gap:8px;margin-top:8px;color:var(--rd)}
+#ti{flex:1;min-width:0;padding:6px 0;background:none;border:0;border-bottom:1px solid var(--ln);color:#fff;font:inherit;font-size:16px;outline:none}
+#ti:focus{border-color:var(--bl)}
+.shake{animation:sh .5s linear}
+@keyframes sh{20%{transform:translate(-6px,2px)}40%{transform:translate(6px,-2px)}60%{transform:translate(-4px,1px)}80%{transform:translate(4px,0)}}
+form{display:grid;gap:12px;max-width:520px;margin-top:22px}
+label{display:grid;gap:6px;font-family:var(--mo);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)}
+input:not(#ti),textarea{padding:12px;background:#050608;border:1px solid var(--ln);color:#fff;font:inherit;font-size:16px}
+input:not(#ti):focus,textarea:focus{outline:none;border-color:var(--bl)}
+#cs{min-height:16px;font-family:var(--mo);font-size:11px;color:var(--mu)}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--ln);font-family:var(--mo);font-size:10px;letter-spacing:.14em;color:var(--mu)}
+@media(min-width:800px){.about{grid-template-columns:1fr 300px}}
+@media(max-width:640px){.ml{display:none}.mr{top:78px}}
+@media(prefers-reduced-motion:reduce){.mqt{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo" src="assets/logo.jpg" alt="">
+  <a class="brand" href="#top">WEIRD SCARS</a>
+  <nav>
+    <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <video id="bgv" autoplay muted loop playsinline preload="metadata" src="assets/bg.mp4"></video>
+    <div class="meta ml">BEST VIEWED 1024×768<br>KOSTANAY, KZ</div>
+    <div class="meta mr" id="cd">TRAUMA IN</div>
+    <p class="lab">Electronic music producer · artist</p>
+    <h1>WEIRD SCARS</h1>
+    <p class="sub">Electro-Darkwave / Post-Witch House. Cold, damaged, digital.</p>
+    <div class="btns"><a class="btn" href="https://band.link/amuart" target="_blank" rel="noopener">Listen to TRAUMA</a><a class="btn" href="#cipher">Decode</a></div>
+  </section>
+
+  <section id="about" class="about">
+    <div>
+      <p class="lab">01 / About</p>
+      <p class="lede" style="font-size:clamp(19px,3vw,28px);color:#fff;line-height:1.5;max-width:760px">WEIRD SCARS is an electronic music producer and artist from Kazakhstan. His sound moves between Electro-Darkwave and Post-Witch House — cold, damaged, and digital, transforming inner scars into dark electronic forms.</p>
+      <div class="st">
+        <div><b>CITY</b><span>Kostanay, Kazakhstan</span></div>
+        <div><b>SOUND</b><span>Electro-Darkwave / Post-Witch House</span></div>
+        <div><b>THEME</b><span>Inner scars turned into digital form</span></div>
+      </div>
+    </div>
+    <img src="assets/artist.jpg" alt="WEIRD SCARS">
+  </section>
+
+  <section id="releases">
+    <p class="lab">02 / Releases</p>
+    <h2>Releases</h2>
+    <p class="lede">Tap a cover to open its BandLink.</p>
+    <div class="car" id="car"></div>
+    <div class="ctl"><button id="prev" type="button">← PREV</button><button id="next" type="button">NEXT →</button></div>
+  </section>
+
+  <div class="mq"><div class="mqt" id="mqt"></div></div>
+
+  <section id="booking">
+    <p class="lab">03 / Live</p>
+    <h2>Live &amp; booking</h2>
+    <p class="lede">Live sets, bookings and press: weirdscars.connect@gmail.com</p>
+    <div class="btns"><a class="btn" href="mailto:weirdscars.connect@gmail.com">Write an email</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
+  </section>
+
+  <section id="cipher">
+    <p class="lab">04 / Cipher</p>
+    <h2>Decode the signal</h2>
+    <p class="lede">Type a key or a keyword in the terminal. Checks run in your browser, nothing is sent anywhere.</p>
+    <div class="cp">
+      <small>CIPHER</small>XOR_BLOCK_05
+      <small>KEY</small><span class="rd"></span>
+      <small>DATA STREAM</small>
+<div class="ds" id="ds"></div>
+      <small>SHA-256 (click to expand)</small>
+      <details class="hs"><summary id="hsh"></summary><span>ec87fa7ec47347eb654109d4b5a71ed592f9a31bc5e89d608978b286e50fbfb4</span></details>
+    </div>
+    <div class="term" id="term">
+      <div class="out" id="out"></div>
+      <form id="tf" autocomplete="off"><span>&gt;</span><input id="ti" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input"></form>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="lab">05 / Contact</p>
+    <h2>Direct link</h2>
+    <form id="cf" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p hidden><input name="bot-field"></p>
+      <label>Alias / Name<input name="name" required></label>
+      <label>Contact (email / Telegram)<input name="contact" required></label>
+      <label>Message<textarea name="message" rows="4"></textarea></label>
+      <button class="btn" type="submit" style="justify-self:start">Send signal</button>
+      <div id="cs"></div>
+    </form>
+  </section>
+</main>
+
+<footer><span>© 2026 WEIRD SCARS</span><span>made in kostanay · best viewed in 1024×768</span></footer>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pad=v=>String(v).padStart(2,'0'),wait=ms=>new Promise(r=>setTimeout(r,ms));
+if(RM)$('#bgv').pause();
+
+// countdown to 18.11.2026 00:00 Kazakhstan (UTC+5). Absolute instant, so it is right in any timezone.
+const RELEASE={label:'TRAUMA IN',at:'2026-11-18T00:00:00+05:00'}; // next release: change label and date (+05 = Kostanay)
+const TARGET=Date.parse(RELEASE.at),CD=$('#cd');
+let kz;
+try{kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Qostanay',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
+catch(e){kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Almaty',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
+const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='KOSTANAY, KZ '+kz.format(new Date())};
+tick();setInterval(tick,1000);
+
+// releases: cover + BandLink
+const R=[
+['ANOMALY','https://band.link/anmly','https://music-bandlink.s3.yandex.net/img/bandlinks/gzENf_q8CgQpPU.jpeg'],
+['FALLEN & CURSED','https://band.link/falcur','https://music-bandlink.s3.yandex.net/img/bandlinks/73EBd_xD8IVEUE.jpeg'],
+['CRUEL HEARTS','https://band.link/cruelhearts','https://music-bandlink.s3.yandex.net/img/bandlinks/GfPUY_Mb7iAyhU.jpeg'],
+['BURIED BY MY SILENCE','https://band.link/buriedbymysilence','https://music-bandlink.s3.yandex.net/img/bandlinks/chdc4_I0dnsVXV.jpeg'],
+['ECHOES OF OLD MEMORIES','https://band.link/oldmem','https://music-bandlink.s3.yandex.net/img/bandlinks/6pzjW_4otxNfbx.jpeg'],
+['CORRUPTED','https://band.link/corrupted','https://music-bandlink.s3.yandex.net/img/bandlinks/2bccb94f-b132-4fbd-b5a8-9dfc411ae143_1120_1120.jpeg'],
+['LO-RES CAGE','https://band.link/lores','https://music-bandlink.s3.yandex.net/img/bandlinks/b33fabe9-f0aa-4376-809b-271b50a7fed3_1120_1120.jpeg'],
+['FALSE GODS','https://band.link/falsegods','https://music-bandlink.s3.yandex.net/img/bandlinks/f5efc606-c652-4106-8b13-24a90e254e46_1120_1120.jpeg'],
+['FAKE MELANCHOLY','https://band.link/fakecholy','https://music-bandlink.s3.yandex.net/img/bandlinks/afc1355c-8ac5-43f3-8817-394b46e4bd3d_1120_1120.jpeg'],
+['TRAUMA','https://band.link/amuart','https://music-bandlink.s3.yandex.net/img/bandlinks/59d3392f-50d9-469b-a055-f94e156d0995_1120_1120.jpeg']
+];
+const car=$('#car');
+R.forEach(([t,u,c])=>{const a=document.createElement('a');a.className='rc';a.href=u;a.target='_blank';a.rel='noopener';a.innerHTML='<img loading="lazy" alt="" src="'+c+'"><b></b><small>LISTEN / LINKS →</small>';a.querySelector('b').textContent=t;car.appendChild(a)});
+const go=d=>car.scrollBy({left:d*(car.querySelector('.rc').offsetWidth+12),behavior:RM?'auto':'smooth'});
+$('#prev').onclick=()=>go(-1);$('#next').onclick=()=>go(1);
+
+// tags marquee: two identical sets, so the loop is seamless
+const TAGS=['#weird scars','#midtempobass','#industrialtechno','#darkwave','#ebm','#darkmusic','#cyberpunk','#witchhouse','#darkaesthetic','#synthwave','#darktechno','#undergroundmusic','#darkelectronic','#industrial','#darkclubbing','#midtempo','#weirdscars','#lorescage','ANOMALY','FALLEN & CURSED','CRUEL HEARTS','BURIED BY MY SILENCE','ECHOES OF OLD MEMORIES','CORRUPTED','LO-RES CAGE','FALSE GODS','FAKE MELANCHOLY','TRAUMA','Nikita Kayakhov, Kostanay'];
+const MQ=$('#mqt');
+for(let k=0;k<2;k++)TAGS.forEach(t=>{const s=document.createElement('span');s.textContent=t;MQ.appendChild(s)});
+
+// contact: Netlify Forms (no backend). Submissions show up in the Netlify dashboard and can be emailed.
+$('#cf').onsubmit=async e=>{
+  e.preventDefault();const st=$('#cs');st.textContent='transmitting...';
+  try{
+    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(e.target)).toString()});
+    st.textContent=r.ok?'signal received.':'transmission failed.';if(r.ok)e.target.reset();
+  }catch(err){st.textContent='transmission failed (works after deploy).'}
+};
+
+// terminal
+const OUT=$('#out'),TI=$('#ti'),TERM=$('#term');
+const HEX="84 F0 90 D5 9D F1 84 E0 91 E9 9C CA 74 83 CC 84 CF 91 EA 72 90 D2 9D F1 85 D3 90 D7 9C CD 74 82 FC 85 FD 90 D5 72 91 ED 6D 91 E5 82 F4 85 FA 61 84 EF 91 ED 9C C4 74 82 FC 85 F8 91 E6 82 FF 85 FA 91 E8 82 FF 85 FB 91 E9 82 FF 75 9D FC 84 EA 61 85 FF 91 EA 83 C0 85 F2 91 EC 83 C3 85 FD 90 D6 83 CD 75 9C C6 84 E7 91 EE 9D FF 84 E0 91 E0 9D FB 84 E2 61 85 F0 91 EC 72 91 E3 9D F9 85 D0 90 D9 6D 91 E6 82 FF 75 9D F3 84 E5 90 D5 9D FF 85 D3 91 EE 9D FF 84 EE 61 85 FF 91 EA 82 F6 84 CD 91 E4 83 C0 84 CF 91 E1 7C 61 85 D1 91 EA 82 F8 75 9D FE 85 D3 91 E0 9D F3 84 E6 91 EB 9D FC 84 EA 91 E9 6D 91 EC 72 91 E7 9C C0 84 E7 61 84 CF 91 E6 82 FF 84 CD 90 D3 82 F4 84 CC 90 D6 82 F3 85 F3 61 85 D3 91 E7 9C CE 84 E5 91 E5 9D FC 84 EC 61 84 CC 61 85 DF 90 D7 9D FF 84 EB 61 85 F5 91 E0 82 F4 85 F8 91 ED 7E 61 84 CF 91 EA 82 FA 84 C1 91 EE 82 FF 75 9C CE 74 82 FC 85 F8 61 84 E0 91 EB 9D F6 84 EF 91 E0 9D FC 84 E2 91 E7 9D F9 84 E6 91 E0 9D FA 74 82 FD 85 F5 90 D4 72 91 ED 6D 91 EF 83 CF 85 F9 91 E1 82 F8 7B 6D 91 FB 72 91 EA 9D FF 84 E9 90 DB 9D F0 84 EA 91 EE 6D 90 D6 82 F4 75 9C C3 85 D2 91 E5 9D F3 84 EE 90 DE 61 61 85 D5 90 D7 9D FF 74 82 FC 85 F8 61 84 EE 91 EB 9D F2 85 D1 61 85 F5 91 E3 82 FD 85 F8 91 E9 82 F9 84 CF 90 D8 72 91 E7 6D 90 D5 82 F4 85 FC 91 E1 7C 61 85 D2 91 EA 83 C0 85 F7 91 EA 82 FA 84 C1 91 EE 83 C2 75 9D FF 84 EF 91 ED 6D 91 E0 82 F1 84 CD 90 D7 83 CF 84 CF 61 84 EF 91 E0 6D 90 D6 82 FF 85 F6 90 D8 82 FB 85 F3 61 84 E3 91 EB 9D FA 85 DE 61 85 F0 91 EA 72 91 ED 6D 91 E9 82 F4 85 F7 91 EA 83 C3 85 F3 90 D4 83 CA 85 F8 61 84 ED 90 D5 9D F4 84 EA 91 E9 9C C2 85 DB 91 E0 9C C0 85 D0 91 E7 9D F1 7A 72 91 C4 9C C2 84 E6 90 D9 6D 90 D5 82 FF 75 9D FD 84 EF 91 EB 9D F8 74 83 C1 85 F3 91 E6 82 FC 85 F3 61 84 E0 61 65 77 71 64 72 91 ED 6D 91 EB 82 FF 85 FA 91 E9 82 F1 85 F4 61 84 E0 91 E0 9C C0 85 DE 61 85 F7 91 EA 82 FC 84 CF 90 D4 82 F1 84 CC 90 D6 72 91 F7 9C C1 84 E2 91 E7 9D FD 85 D9 6F",HASH="ec87fa7ec47347eb654109d4b5a71ed592f9a31bc5e89d608978b286e50fbfb4";
+const BY=HEX.split(' '),ROWS=[];for(let i=0;i<BY.length;i+=8)ROWS.push(BY.slice(i,i+8).join(' '));
+let ri=0;const DSEL=$('#ds');
+const scroll=()=>{DSEL.textContent=Array.from({length:5},(_,k)=>ROWS[(ri+k)%ROWS.length]).join('\n');ri=(ri+1)%ROWS.length};
+scroll();if(!RM)setInterval(scroll,320);
+$('#hsh').textContent=HASH.slice(0,8)+'…'+HASH.slice(-6);
+const say=(t,c='')=>{const p=document.createElement('p');if(c)p.className=c;p.textContent=t;OUT.appendChild(p);OUT.scrollTop=OUT.scrollHeight;return p};
+const shake=()=>{TERM.classList.remove('shake');void TERM.offsetWidth;TERM.classList.add('shake')};
+const FA=["  .:.     .:.  ","::::::.:.:.::::::"," `::::::::::::' ","    `:::::'    "];
+const FB=["              ","  .::.   .::.  ","::::::::::::::"," `:::::::::::' "];
+async function butterflies(){
+  const pre=document.createElement('pre');OUT.appendChild(pre);
+  for(const l of FA){pre.textContent+=l+'\n';OUT.scrollTop=OUT.scrollHeight;await wait(90)}
+  for(let i=0;i<8;i++){pre.textContent=(i%2?FB:FA).join('\n');OUT.scrollTop=OUT.scrollHeight;await wait(320)}
+  say('the butterflies flew away.','o');
+}
+const LN=['load /smp/steppe_kick_07.wav','ERR 0x7FA2 ch:3 buffer overrun','0100 1011 0011 1101','function glitch(){return null}','render_frame(TRAUMA, 0x00)','sample: kaz_wind_loop.flac [LOST]','key ??? -> 0xDE 0xAD 0xBE 0xEF'];
+async function madness(){
+  const cs='0123456789ABCDEF#$%&*<>[]{}';shake();
+  for(let i=0;i<32;i++){let s='';for(let j=0;j<44;j++)s+=cs[Math.random()*cs.length|0];say(i%4?s:LN[i%LN.length],'e');await wait(60)}
+  say('signal restored.','o');
+}
+const NS='Не совсем понятно, кто это и зачем это имя зашифровано здесь. Но одно ясно — когда-то это что-то значило.';
+const MO='Вы разозлили WEIRD SCARS. Больше так не делайте.';
+const MA='Друг исполнителя, снимающий развлекательный контент.';
+const OP='У любого действия есть последствия. Будь аккуратен, ведь иногда легкомысленный шаг может запустить цепочку событий, которые заставят тебя пожалеть об этом.';
+const EL='Бабочки больше не летают. Они улетели в теплые степи и от них давно никаких известий.';
+const MV='https://www.youtube.com/@maaalvin';
+
+$('#tf').onsubmit=async e=>{
+  e.preventDefault();
+  const raw=TI.value.trim();TI.value='';if(!raw)return;
+  const v=raw.toLowerCase().replace(/\s+/g,' ');
+  say('> '+raw);
+  if(v==='help'){say('commands: help, clear. or type a key / keyword.');return}
+  if(v==='clear'){OUT.innerHTML='';return}
+  if(v==='nastya'||v==='101'){say(NS);return}
+  if(v==='moscow'||v==='москва'){shake();say(MO,'e');return}
+  if(v==='malvin'){
+    window.open(MV,'_blank','noopener');
+    const p=say(MA,'o'),a=document.createElement('a');
+    a.href=MV;a.target='_blank';a.rel='noopener';a.textContent='youtube.com/@maaalvin';
+    a.onclick=ev=>{ev.preventDefault();window.open(MV,'_blank','noopener')};
+    p.append(' ',a);return;
+  }
+  if(v==='operation payback'){say(OP,'o');return}
+  if(v==='ellibria'){say(EL,'o');await butterflies();return}
+  if(v==='matrix'||v==='leak'){await madness();return}
+  if(!crypto.subtle){say('ERROR: https required','e');return}
+  try{
+    const key=new TextEncoder().encode(raw.toUpperCase());
+    const bytes=Uint8Array.from(HEX.split(' '),h=>parseInt(h,16));
+    const out=bytes.map((b,i)=>b^key[i%key.length]);
+    const d=new Uint8Array(await crypto.subtle.digest('SHA-256',out));
+    if([...d].map(b=>b.toString(16).padStart(2,'0')).join('')===HASH){say('ACCESS GRANTED','o');say(new TextDecoder().decode(out),'o')}
+    else say('ACCESS DENIED: signature mismatch','e');
+  }catch(err){say('ERROR: '+err.message,'e')}
+};
+say('WEIRD SCARS terminal v2.6');say('type "help" for commands');
+})();
+</script>
+</body>
+</html>
