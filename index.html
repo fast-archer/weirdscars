@@ -25,28 +25,29 @@ nav{display:flex;gap:14px;margin-left:auto;min-width:0;overflow-x:auto;white-spa
 nav::-webkit-scrollbar{display:none}
 nav a{text-decoration:none;color:var(--mu)}
 nav a:hover{color:#fff}
-.hero{position:relative;isolation:isolate;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px 20px 56px;overflow:hidden;max-width:none;border-top:0}
+.hero{position:relative;isolation:isolate;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px max(20px,calc((100% - 1040px)/2)) 56px;overflow:hidden;border-top:0}
 #bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:-2;pointer-events:none}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.35),#000 95%)}
 .meta{position:absolute;top:84px;font-family:var(--mo);font-size:10px;letter-spacing:.16em;color:var(--mu);line-height:1.8}
-.ml{left:20px}
-.mr{right:20px;text-align:right;color:#fff}
-h1{font-size:clamp(28px,9.2vw,132px);white-space:nowrap}
+.ml{left:max(20px,calc((100% - 1040px)/2))}
+.mr{right:max(20px,calc((100% - 1040px)/2));text-align:right;color:#fff}
+h1{font-size:clamp(28px,8.6vw,120px);white-space:nowrap}
+.gl{animation:jit .5s steps(2) 1}
+@keyframes jit{20%{transform:translate(-3px,0) skewX(4deg);text-shadow:3px 0 #fff}40%{transform:translate(2px,0);text-shadow:-2px 0 #fff;clip-path:inset(20% 0 45% 0)}60%{transform:skewX(-3deg);clip-path:inset(60% 0 10% 0)}80%{transform:translate(-1px,1px);clip-path:none;text-shadow:none}}
 .sub{margin:18px 0 0;max-width:620px;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#b8bec7;line-height:1.7}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 .btn{display:inline-block;padding:13px 20px;border:1px solid #fff;color:#fff;text-decoration:none;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:none;cursor:pointer;touch-action:manipulation}
 .btn:hover{background:#fff;color:#000}
-section{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:clamp(60px,10vw,96px) 20px;border-top:1px solid var(--ln)}
+section{position:relative;z-index:1;padding:clamp(60px,10vw,96px) max(20px,calc((100% - 1040px)/2));border-top:1px solid var(--ln)}
 .about{display:grid;gap:28px;align-items:center;overflow:hidden}
-.about::before{content:"";position:absolute;inset:0;z-index:-1;background:url(assets/artist.jpg) center/cover;filter:blur(28px) saturate(.6);opacity:.2;transform:scale(1.15)}
 .about img{width:100%;max-width:300px;justify-self:center;border:1px solid var(--ln);filter:grayscale(.3)}
 .st{display:grid;gap:10px;margin-top:26px}
 .st div{padding:14px;background:#050608;border:1px solid var(--ln)}
 .st b{display:block;font-family:var(--mo);font-size:11px;letter-spacing:.16em;font-weight:500;color:var(--bl)}
 .st span{display:block;margin-top:6px;color:#cfd5de}
-.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:6px 2px 16px;margin-top:24px}
+.car{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:6px 2px 16px;margin-top:24px}
 .car::-webkit-scrollbar{display:none}
-.rc{flex:0 0 min(230px,70vw);scroll-snap-align:center;text-decoration:none;padding:10px;background:#050608;border:1px solid var(--ln);transition:border-color .3s,transform .4s}
+.rc{flex:0 0 min(230px,70vw);text-decoration:none;padding:10px;background:#050608;border:1px solid var(--ln);transition:border-color .3s,transform .4s}
 .rc img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:contrast(1.05)}
 .rc:hover{border-color:var(--bl);transform:translateY(-4px)}
 .rc b{display:block;margin-top:10px;font-family:var(--mo);font-size:12px;letter-spacing:.06em}
@@ -88,7 +89,10 @@ input:not(#ti):focus,textarea:focus{outline:none;border-color:var(--bl)}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--ln);font-family:var(--mo);font-size:10px;letter-spacing:.14em;color:var(--mu)}
 @media(min-width:800px){.about{grid-template-columns:1fr 300px}}
 @media(max-width:640px){.ml{display:none}.mr{top:78px}}
-@media(prefers-reduced-motion:reduce){.mqt{animation:none}}
+.hl{position:relative;isolation:isolate}
+.hl::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(90deg,transparent calc(var(--x,50%) - 1px),rgba(127,184,255,.35) var(--x,50%),transparent calc(var(--x,50%) + 1px)),linear-gradient(180deg,transparent calc(var(--y,50%) - 1px),rgba(127,184,255,.35) var(--y,50%),transparent calc(var(--y,50%) + 1px)),radial-gradient(160px circle at var(--x,50%) var(--y,50%),rgba(127,184,255,.12),transparent 70%)}
+.hl:hover::before{opacity:1}
+@media(prefers-reduced-motion:reduce){.mqt,.gl{animation:none}}
 </style>
 </head>
 <body>
@@ -139,7 +143,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     <p class="lab">03 / Live</p>
     <h2>Live &amp; booking</h2>
     <p class="lede">Live sets, bookings and press: weirdscars.connect@gmail.com</p>
-    <div class="btns"><a class="btn" href="mailto:weirdscars.connect@gmail.com">Write an email</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
+    <div class="btns"><a class="btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=weirdscars.connect@gmail.com" target="_blank" rel="noopener">Write an email</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
   </section>
 
   <section id="cipher">
@@ -206,9 +210,35 @@ const R=[
 ['TRAUMA','https://band.link/amuart','https://music-bandlink.s3.yandex.net/img/bandlinks/59d3392f-50d9-469b-a055-f94e156d0995_1120_1120.jpeg']
 ];
 const car=$('#car');
-R.forEach(([t,u,c])=>{const a=document.createElement('a');a.className='rc';a.href=u;a.target='_blank';a.rel='noopener';a.innerHTML='<img loading="lazy" alt="" src="'+c+'"><b></b><small>LISTEN / LINKS →</small>';a.querySelector('b').textContent=t;car.appendChild(a)});
-const go=d=>car.scrollBy({left:d*(car.querySelector('.rc').offsetWidth+12),behavior:RM?'auto':'smooth'});
+[...R,...R].forEach(([t,u,c])=>{const a=document.createElement('a');a.className='rc';a.href=u;a.target='_blank';a.rel='noopener';a.innerHTML='<img loading="lazy" alt="" src="'+c+'"><b></b><small>LISTEN / LINKS →</small>';a.querySelector('b').textContent=t;car.appendChild(a)});
+let half=0,pos=0,paused=false,last=performance.now();
+const measure=()=>{half=car.children[R.length].offsetLeft};
+const resume=()=>{pos=half?car.scrollLeft%half:0;paused=false};
+measure();addEventListener('resize',measure,{passive:true});
+car.addEventListener('pointerenter',()=>paused=true);
+car.addEventListener('pointerleave',resume);
+car.addEventListener('pointerdown',()=>paused=true);
+car.addEventListener('pointerup',resume);
+const spin=now=>{const dt=Math.min(64,now-last);last=now;if(!paused&&!RM&&half){pos+=dt*0.03;if(pos>=half)pos-=half;car.scrollLeft=pos}requestAnimationFrame(spin)};
+requestAnimationFrame(spin);
+const go=d=>{const st=car.querySelector('.rc').offsetWidth+12;paused=true;if(car.scrollLeft<st)car.scrollLeft+=half;car.scrollBy({left:d*st,behavior:RM?'auto':'smooth'});clearTimeout(go.t);go.t=setTimeout(resume,900)};
 $('#prev').onclick=()=>go(-1);$('#next').onclick=()=>go(1);
+
+// cursor crosshair on interactive blocks
+document.querySelectorAll('.btn,.ctl button,.cp,.st div,.rc').forEach(el=>el.classList.add('hl'));
+document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const el=e.target.closest&&e.target.closest('.hl');if(!el)return;const r=el.getBoundingClientRect();el.style.setProperty('--x',(e.clientX-r.left)+'px');el.style.setProperty('--y',(e.clientY-r.top)+'px')},{passive:true});
+
+// y2k scramble on hover; WEIRD SCARS glitches every 30 s
+const CH='01ABCDEF#%&*<>/';
+function scramble(el,ms=420){
+  if(RM)return;
+  const o=el.dataset.t||(el.dataset.t=el.textContent);
+  const t0=performance.now();clearInterval(el._s);
+  el._s=setInterval(()=>{const p=(performance.now()-t0)/ms;el.textContent=[...o].map((c,i)=>c===' '||i/o.length<p?c:CH[Math.random()*CH.length|0]).join('');if(p>=1){clearInterval(el._s);el.textContent=o}},30);
+}
+document.querySelectorAll('nav a,.btn,.ctl button').forEach(el=>el.addEventListener('pointerenter',()=>scramble(el)));
+const H1=$('h1');
+setInterval(()=>{H1.classList.add('gl');scramble(H1,500);setTimeout(()=>H1.classList.remove('gl'),520)},30000);
 
 // tags marquee: two identical sets, so the loop is seamless
 const TAGS=['#weird scars','#midtempobass','#industrialtechno','#darkwave','#ebm','#darkmusic','#cyberpunk','#witchhouse','#darkaesthetic','#synthwave','#darktechno','#undergroundmusic','#darkelectronic','#industrial','#darkclubbing','#midtempo','#weirdscars','#lorescage','ANOMALY','FALLEN & CURSED','CRUEL HEARTS','BURIED BY MY SILENCE','ECHOES OF OLD MEMORIES','CORRUPTED','LO-RES CAGE','FALSE GODS','FAKE MELANCHOLY','TRAUMA','Nikita Kayakhov, Kostanay'];
