@@ -134,7 +134,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
 <main id="top">
   <section class="hero">
     <video id="bgv" autoplay muted loop playsinline preload="metadata" src="assets/bg.mp4"></video>
-    <div class="meta ml">> SYS.ONLINE<br>> SIGNAL: KZ / KOSTANAY</div>
+    <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
     <p class="lab">Electronic music producer · artist</p>
     <h1>WEIRD SCARS</h1>
@@ -233,7 +233,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   </section>
 </main>
 
-<footer><span>© 2026 WEIRD SCARS</span><span>[ kostanay.kz ] // weirdscars © 2026 // no tracking</span></footer>
+<footer><span>© 2026 WEIRD SCARS</span><span>> SIGNAL ROUTED // NO TRACE </span></footer>
 
 <script>
 (()=>{
@@ -247,7 +247,7 @@ const TARGET=Date.parse(RELEASE.at),CD=$('#cd');
 let kz;
 try{kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Qostanay',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
 catch(e){kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Almaty',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
-const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='> SIGNAL LOCKED // KOSTANAY, KZ '+kz.format(new Date())};
+const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='> SIGNAL ROUTED // NO TRACE // © 2026 WEIRD SCARS'+kz.format(new Date())};
 tick();setInterval(tick,1000);
 
 // releases: cover + BandLink
