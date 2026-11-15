@@ -37,8 +37,8 @@ nav::-webkit-scrollbar{display:none}
 nav a{text-decoration:none;color:var(--mu)}
 nav a:hover{color:#fff}
 .hero{position:relative;isolation:isolate;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px max(20px,calc((100% - 1040px)/2)) 56px;overflow:hidden;border-top:0}
-#bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:-2;pointer-events:none}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.35),#000 95%)}
+#bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:-3;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(0,0,0,.35),#000 95%)}
 .meta{position:absolute;top:84px;font-family:var(--mo);font-size:10px;letter-spacing:.16em;color:var(--mu);line-height:1.8}
 .ml{left:max(20px,calc((100% - 1040px)/2))}
 .mr{right:max(20px,calc((100% - 1040px)/2));text-align:right;color:#fff}
@@ -80,7 +80,7 @@ details summary{cursor:pointer;color:var(--mu);font-family:var(--mo)}
 details span{color:var(--mu)}
 .rd{display:inline-block;width:12ch;height:1em;background:#fff;vertical-align:middle}
 .hs{word-break:break-all;color:var(--mu)}
-.term{margin-top:12px;padding:16px;background:#000;border:1px solid var(--rd);font-family:var(--mo);font-size:13px;line-height:1.55}
+.term{margin-top:12px;padding:18px;background:#000;border:1px solid var(--rd);font-family:var(--mo);font-size:13px;line-height:1.55;transition:transform .3s;touch-action:manipulation}
 .out{height:260px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .out p,.out pre{margin:0 0 6px;white-space:pre-wrap;word-break:break-word;color:#c9d0da}
 .out pre{color:var(--bl);line-height:1.15}
@@ -90,12 +90,14 @@ details span{color:var(--mu)}
 #tf{display:flex;align-items:center;gap:8px;margin-top:8px;color:var(--rd)}
 #ti{flex:1;min-width:0;padding:6px 0;background:none;border:0;border-bottom:1px solid var(--ln);color:#fff;font:inherit;font-size:16px;outline:none}
 #ti:focus{border-color:var(--bl)}
+#ti{caret-color:var(--rd)}
+#ti::placeholder{color:var(--mu)}
 .shake{animation:sh .5s linear}
 @keyframes sh{20%{transform:translate(-6px,2px)}40%{transform:translate(6px,-2px)}60%{transform:translate(-4px,1px)}80%{transform:translate(4px,0)}}
 form{display:grid;gap:12px;max-width:520px;margin-top:22px}
 label{display:grid;gap:6px;font-family:var(--mo);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)}
-input:not(#ti),textarea{padding:12px;background:#050608;border:1px solid var(--ln);color:#fff;font:inherit;font-size:16px}
-input:not(#ti):focus,textarea:focus{outline:none;border-color:var(--bl)}
+input:not(#ti),textarea{padding:16px 14px;background:#050608;border:1px solid #2b313b;color:#fff;font:inherit;font-size:16px;transition:border-color .25s,box-shadow .25s}
+input:not(#ti):focus,textarea:focus{outline:none;border-color:var(--bl);box-shadow:0 0 0 3px rgba(127,184,255,.12)}
 #cs{min-height:16px;font-family:var(--mo);font-size:11px;color:var(--mu)}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--ln);font-family:var(--mo);font-size:10px;letter-spacing:.14em;color:var(--mu)}
 @media(min-width:800px){.about{grid-template-columns:1fr 300px}}
@@ -118,10 +120,79 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
 .hl{position:relative;isolation:isolate}
 .hl::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(90deg,transparent calc(var(--x,50%) - 1px),rgba(127,184,255,.35) var(--x,50%),transparent calc(var(--x,50%) + 1px)),linear-gradient(180deg,transparent calc(var(--y,50%) - 1px),rgba(127,184,255,.35) var(--y,50%),transparent calc(var(--y,50%) + 1px)),radial-gradient(160px circle at var(--x,50%) var(--y,50%),rgba(127,184,255,.12),transparent 70%)}
 .hl:hover::before{opacity:1}
-@media(prefers-reduced-motion:reduce){.mqt,.gl{animation:none}}
+/* hero: dust, stronger CTA */
+#dustc{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.btns .btn{transition:box-shadow .3s,background .3s,color .3s,transform .25s}
+.btns .btn:hover{box-shadow:0 0 24px rgba(127,184,255,.45)}
+/* about: features grid + signal data */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:34px}
+.fc{padding:24px;background:#050608;border:1px solid var(--ln);min-height:150px}
+.fc b{font-family:var(--mo);font-size:11px;letter-spacing:.2em;color:var(--bl)}
+.fc h3{font-family:var(--hd);font-size:15px;margin:14px 0 10px;letter-spacing:.03em}
+.fc p{margin:0;color:#aab3bf;line-height:1.6}
+.sig{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:14px;border:1px solid var(--ln)}
+.sig div{padding:20px;font-family:var(--mo);border-right:1px solid var(--ln)}
+.sig div:last-child{border-right:0}
+.sig strong{display:block;font-family:var(--hd);font-size:28px;color:#fff}
+.sig span{font-size:10px;letter-spacing:.2em;color:var(--mu);text-transform:uppercase}
+/* releases: fades at the edges, bigger controls */
+.car-wrap{position:relative}
+.car-wrap::before,.car-wrap::after{content:"";position:absolute;top:0;bottom:16px;width:72px;z-index:2;pointer-events:none}
+.car-wrap::before{left:0;background:linear-gradient(90deg,#000,transparent)}
+.car-wrap::after{right:0;background:linear-gradient(270deg,#000,transparent)}
+.ctl button{width:52px;height:52px;padding:0;font-size:20px;border-color:#fff;color:#fff}
+.ctl button:hover{background:#fff;color:#000}
+/* release modal */
+.rm{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.85)}
+.rm.open{display:flex}
+.rm-box{position:relative;width:100%;max-width:420px;padding:24px;background:#050608;border:1px solid var(--bl)}
+.rm-box img{display:block;width:100%;aspect-ratio:1;object-fit:cover;margin-bottom:16px}
+.rm-box h3{font-family:var(--hd);font-size:20px;margin:0 0 18px}
+.rm-x{position:absolute;top:6px;right:6px;padding:8px;background:none;border:0;color:var(--mu);font-size:22px;cursor:pointer}
+/* archive */
+.arc{opacity:0;transition:opacity .8s ease}
+.arc.show{opacity:1}
+.arcbody{margin-top:18px;padding:18px;background:#050608;border:1px solid var(--ln);font-family:var(--mo);font-size:13px;line-height:1.7;color:#c9d0da;white-space:pre-wrap}
+/* contact: pulse while sending */
+form.sending button{animation:pulse 1s ease-in-out infinite;pointer-events:none;opacity:.85}
+@keyframes pulse{50%{box-shadow:0 0 22px rgba(127,184,255,.55)}}
+@media(prefers-reduced-motion:reduce){.mqt,.gl,form.sending button{animation:none}}
+/* boot console */
+#loader{position:fixed;inset:0;z-index:100;background:#000;display:flex;align-items:center;justify-content:flex-start;transition:opacity .6s ease}
+#loader.hide{opacity:0;pointer-events:none}
+#loader pre{font-family:var(--mo);font-size:clamp(12px,3.6vw,15px);line-height:1.8;color:#e8ecf2;margin:0;padding:clamp(24px,8vw,64px);white-space:pre-wrap;max-width:720px;width:100%}
+.bcur{display:inline-block;color:#fff;text-shadow:0 0 6px #fff,0 0 14px rgba(255,255,255,.6);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+#loader.glitch pre{animation:bglitch .42s steps(2) 1}
+@keyframes bglitch{0%{transform:none}25%{transform:translate(-5px,1px);text-shadow:3px 0 rgba(127,184,255,.8),-3px 0 #fff}50%{transform:translate(6px,-1px);clip-path:inset(30% 0 40% 0)}75%{transform:translate(-2px,0);clip-path:none}100%{transform:none;text-shadow:none}}
+/* scroll reveal */
+.js .rv{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+/* archive cards */
+.acard{padding:16px;margin-top:12px;background:#050608;border:1px solid var(--ln)}
+.acard h3{font-family:var(--hd);font-size:16px;margin:0 0 8px}
+.acard p{margin:0 0 10px;font-family:var(--mo);font-size:13px;line-height:1.6;color:#aab3bf}
+.acard a{color:var(--bl)}
+.acard audio{display:block;width:100%;margin:8px 0 0}
+/* mobile menu: y2k burger and full-screen list */
+header .burger{display:none;flex-direction:column;justify-content:center;align-items:center;width:42px;height:42px;padding:0;margin-left:auto;flex-shrink:0;background:#000;border:1px solid #fff;cursor:pointer}
+header .burger i{display:block;width:18px;height:2px;margin:3px 0;background:#fff;transition:transform .3s,opacity .3s}
+header .burger i:nth-child(2){transform:translateX(4px);background:var(--bl)}
+header .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+header .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:24px 28px;background:rgba(0,0,0,.97);opacity:0;pointer-events:none;transition:opacity .35s ease}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav a{font-family:var(--hd);font-size:26px;letter-spacing:.04em;color:#fff;text-decoration:none}
+.mnav a::before{content:"> ";font-family:var(--mo);font-size:16px;color:var(--bl)}
+.mnav a:hover{color:var(--bl)}
+@media(max-width:767px){nav{display:none}header .burger{display:flex}}
+@media(min-width:768px){.mnav{display:none}}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
+<div id="loader"><pre id="boot"></pre></div>
 
 <header>
   <img class="logo" src="assets/logo.jpg" alt="">
@@ -129,11 +200,16 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   <nav>
     <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
   </nav>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
 </header>
+<div class="mnav" id="mnav">
+  <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
+</div>
 
 <main id="top">
   <section class="hero">
     <video id="bgv" autoplay muted loop playsinline preload="metadata" src="assets/bg.mp4"></video>
+    <canvas id="dustc" aria-hidden="true"></canvas>
     <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
     <p class="lab">Electronic music producer · artist</p>
@@ -146,10 +222,15 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     <div>
       <p class="lab">01 / About</p>
       <p class="lede" style="font-size:clamp(19px,3vw,28px);color:#fff;line-height:1.5;max-width:760px">WEIRD SCARS is an electronic music producer and artist from Kazakhstan. His sound moves between Electro-Darkwave and Post-Witch House — cold, damaged, and digital, transforming inner scars into dark electronic forms.</p>
-      <div class="st">
-        <div><b>CITY</b><span>Kostanay, Kazakhstan</span></div>
-        <div><b>SOUND</b><span>Electro-Darkwave / Post-Witch House</span></div>
-        <div><b>THEME</b><span>Inner scars turned into digital form</span></div>
+      <div class="feat">
+        <div class="fc"><b>01</b><h3>SOUND</h3><p>Electro-Darkwave / Post-Witch House. Cold, damaged, digital.</p></div>
+        <div class="fc"><b>02</b><h3>ORIGIN</h3><p>Kostanay, Kazakhstan.</p></div>
+        <div class="fc"><b>03</b><h3>THEME</h3><p>Inner scars turned into digital form.</p></div>
+      </div>
+      <div class="sig" aria-label="Signal data">
+        <div><strong id="cnt-rel">0</strong><span>Releases</span></div>
+        <div><strong>KZ</strong><span>Based in Kostanay</span></div>
+        <div><strong id="cnt-plat">0</strong><span>Platforms</span></div>
       </div>
     </div>
     <img src="assets/artist.jpg" alt="WEIRD SCARS">
@@ -158,9 +239,9 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   <section id="releases">
     <p class="lab">02 / Releases</p>
     <h2>Releases</h2>
-    <p class="lede">Tap a cover to open its BandLink.</p>
-    <div class="car" id="car"></div>
-    <div class="ctl"><button id="prev" type="button">← PREV</button><button id="next" type="button">NEXT →</button></div>
+    <p class="lede">Tap a cover for details.</p>
+    <div class="car-wrap"><div class="car" id="car"></div></div>
+    <div class="ctl"><button id="prev" type="button" aria-label="Previous release">&larr;</button><button id="next" type="button" aria-label="Next release">&rarr;</button></div>
   </section>
 
   <section id="listen">
@@ -183,7 +264,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     <p class="lab">03 / Live</p>
     <h2>Live &amp; booking</h2>
     <p class="lede">Live sets, bookings and press. Write through the form below or to weirdscars.connect@gmail.com</p>
-    <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
+    <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="https://t.me/weirdscars" target="_blank" rel="noopener">Telegram</a></div>
   </section>
 
   <section id="follow">
@@ -215,8 +296,14 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     </div>
     <div class="term" id="term">
       <div class="out" id="out"></div>
-      <form id="tf" autocomplete="off"><span>&gt;</span><input id="ti" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input"></form>
+      <form id="tf" autocomplete="off"><span>&gt;</span><input id="ti" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" placeholder="type 'help'"></form>
     </div>
+  </section>
+
+  <section id="archive" class="arc" hidden>
+    <p class="lab">Archive</p>
+    <h2>Unlocked</h2>
+    <div class="arcbody" id="arcbody"></div>
   </section>
 
   <section id="contact">
@@ -233,7 +320,14 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   </section>
 </main>
 
-<footer><span>© 2026 WEIRD SCARS</span><span>> SIGNAL ROUTED // NO TRACE </span></footer>
+<div class="rm" id="rm" role="dialog" aria-modal="true" aria-label="Release">
+  <div class="rm-box"><button class="rm-x" id="rmx" aria-label="Close">&times;</button>
+    <img id="rmimg" alt=""><p class="lab">Release</p><h3 id="rmt"></h3>
+    <a class="btn" id="rml" target="_blank" rel="noopener">Open on BandLink</a>
+  </div>
+</div>
+
+<footer><span>© 2026 WEIRD SCARS</span><span>&gt; > SIGNAL ROUTED // NO TRACE</span></footer>
 
 <script>
 (()=>{
@@ -247,7 +341,7 @@ const TARGET=Date.parse(RELEASE.at),CD=$('#cd');
 let kz;
 try{kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Qostanay',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
 catch(e){kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Almaty',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
-const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='> SIGNAL ROUTED // NO TRACE // © 2026 WEIRD SCARS'+kz.format(new Date())};
+const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='> SIGNAL LOCKED // KOSTANAY, KZ '+kz.format(new Date())};
 tick();setInterval(tick,1000);
 
 // releases: cover + BandLink
@@ -264,7 +358,7 @@ const R=[
 ['TRAUMA','https://band.link/amuart','https://music-bandlink.s3.yandex.net/img/bandlinks/59d3392f-50d9-469b-a055-f94e156d0995_1120_1120.jpeg']
 ];
 const car=$('#car');
-[...R,...R].forEach(([t,u,c])=>{const a=document.createElement('a');a.className='rc';a.href=u;a.target='_blank';a.rel='noopener';a.innerHTML='<img loading="lazy" alt="" src="'+c+'"><b></b><small>LISTEN / LINKS →</small>';a.querySelector('b').textContent=t;car.appendChild(a)});
+[...R,...R].forEach(([t,u,c])=>{const a=document.createElement('a');a.className='rc';a.href=u;a.target='_blank';a.rel='noopener';a.innerHTML='<img loading="lazy" alt="" src="'+c+'"><b></b><small>LISTEN / LINKS →</small>';a.querySelector('b').textContent=t;a.onclick=e=>{e.preventDefault();openRel(t,u,c)};car.appendChild(a)});
 let half=0,pos=0,paused=false,last=performance.now();
 const measure=()=>{half=car.children[R.length].offsetLeft};
 const resume=()=>{pos=half?car.scrollLeft%half:0;paused=false};
@@ -307,12 +401,71 @@ $('#nl').onsubmit=async e=>{
   try{await fetch('https://buttondown.com/api/emails/embed-subscribe/'+BUTTONDOWN,{method:'POST',mode:'no-cors',body:new FormData(e.target)});st.textContent='subscribed. check your email.';e.target.reset()}
   catch(err){st.textContent='subscribe failed. try again later.'}
 };
+
+// boot console: typed lines, progress, glitch, then the site. Once per tab session. Click or any key skips.
+const SMALL=matchMedia('(max-width: 767px)');
+document.documentElement.classList.add('js');
+const L=$('#loader'),bp=$('#boot');
+const BOOT=['> WEIRD_SCARS_OS v2.6','> BOOTING...','> MOUNTING /dev/steppe ... OK','> DECRYPTING ARCHIVE_KEYS ... OK','> CONNECTING TO KOSTANAY NODE ... OK','> [WARNING] SIGNAL IS CORRUPTED','> ESTABLISHING SECURE TUNNEL...'];
+const curEl=document.createElement('span');curEl.className='bcur';curEl.textContent='_';
+const paint=lines=>{bp.textContent=lines.join('\n')+'\n';bp.appendChild(curEl)};
+let skipped=false;
+const skipBoot=()=>{if(skipped)return;skipped=true;L.classList.add('hide')};
+if(RM||sessionStorage.getItem('booted')){skipBoot()}
+else{
+  sessionStorage.setItem('booted','1');
+  L.onclick=skipBoot;addEventListener('keydown',skipBoot,{once:true});
+  (async()=>{
+    const lines=[];
+    for(const l of BOOT){if(skipped)return;lines.push(l);paint(lines);await wait(260)}
+    lines.push('> LOADING ... 0%');paint(lines);
+    for(let p=4;p<=100;p+=4){if(skipped)return;lines[lines.length-1]='> LOADING ... '+p+'%';paint(lines);await wait(50)}
+    lines.push('> [100%] ACCESS GRANTED');paint(lines);await wait(500);
+    if(skipped)return;
+    L.classList.add('glitch');await wait(420);skipBoot();
+  })();
+  setTimeout(skipBoot,9000);
+}
+// scroll reveal: blocks rise in as they enter the viewport
+document.querySelectorAll('main > section:not(.hero) > *, .fc, .sig').forEach(el=>{el.classList.add('rv');el.style.transitionDelay=(Array.from(el.parentElement.children).indexOf(el)%4)*.1+'s'});
+const RV=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');RV.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>RM?el.classList.add('in'):RV.observe(el));
+// mobile menu: burger opens a full-screen list, a link closes it and scrolls there
+const BG=$('#burger'),MN=$('#mnav');
+const setMenu=o=>{MN.classList.toggle('open',o);BG.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''};
+BG.onclick=()=>setMenu(!MN.classList.contains('open'));
+MN.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+// signal counters: real numbers from the release list and platform links
+$('#cnt-rel').textContent=R.length;$('#cnt-plat').textContent=document.querySelectorAll('.pl a').length;
+// release details modal
+const RMD=$('#rm');
+function openRel(t,u,c){$('#rmimg').src=c;$('#rmt').textContent=t;$('#rml').href=u;RMD.classList.add('open')}
+const closeRel=()=>RMD.classList.remove('open');
+$('#rmx').onclick=closeRel;RMD.onclick=e=>{if(e.target===RMD)closeRel()};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeRel()});
+// magnetic buttons and terminal tilt: mouse only, desktop only, off for reduced motion
+document.querySelectorAll('.btns .btn,.nl button').forEach(b=>{
+  b.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||RM||SMALL.matches)return;const r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left)-r.width/2)*.12+'px,'+((e.clientY-r.top)-r.height/2)*.18+'px)'});
+  b.addEventListener('pointerleave',()=>{b.style.transform=''});
+});
+const TERMEL=$('#term');
+TERMEL.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||RM||SMALL.matches)return;const r=TERMEL.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;TERMEL.style.transform='perspective(900px) rotateX('+(-y*3).toFixed(2)+'deg) rotateY('+(x*3).toFixed(2)+'deg)'});
+TERMEL.addEventListener('pointerleave',()=>{TERMEL.style.transform=''});
+// hero dust: pale blue, paused off screen, removed on small screens
+const DC=$('#dustc'),dx=DC.getContext('2d');let DP=[],DW=0,DH=0,dOn=true,dW0=innerWidth;
+function dustSize(){const D=Math.min(devicePixelRatio||1,1.5);DW=DC.clientWidth;DH=DC.clientHeight;DC.width=DW*D;DC.height=DH*D;dx.setTransform(D,0,0,D,0,0);DP=Array.from({length:Math.min(90,Math.floor(DW*DH/10000))},()=>({x:Math.random()*DW,y:Math.random()*DH,r:Math.random()*1.4+.3,v:Math.random()*.35+.08,a:Math.random()*.5+.2}))}
+function dustLoop(){if(dOn){dx.clearRect(0,0,DW,DH);for(const p of DP){if(!RM){p.y-=p.v;if(p.y<0)p.y=DH}dx.fillStyle='rgba(150,190,255,'+p.a+')';dx.beginPath();dx.arc(p.x,p.y,p.r,0,6.283);dx.fill()}}if(!RM)requestAnimationFrame(dustLoop)}
+new IntersectionObserver(e=>{dOn=e[0].isIntersecting}).observe(DC.parentElement);
+if(SMALL.matches)DC.style.display='none';
+dustSize();dustLoop();
+addEventListener('resize',()=>{if(innerWidth!==dW0){dW0=innerWidth;DC.style.display=SMALL.matches?'none':'';dustSize()}},{passive:true});
 // contact: Web3Forms (free, delivers to weirdscars.connect@gmail.com). Paste your access key below.
 const WEB3KEY='b362e1dd-f001-4f7b-8b07-f2ee51dd4809';
 $('#cf').onsubmit=async e=>{
   e.preventDefault();const st=$('#cs');
   if(WEB3KEY.startsWith('PASTE')){st.textContent='form not configured yet.';return}
-  st.textContent='transmitting...';
+  st.textContent='transmitting...';e.target.classList.add('sending');setTimeout(()=>e.target.classList.remove('sending'),4000);
   const f=new FormData(e.target);
   const body={access_key:WEB3KEY,subject:'WEIRD SCARS signal',name:f.get('name'),contact:f.get('contact'),message:f.get('message'),botcheck:f.get('botcheck')||''};
   try{
@@ -348,7 +501,7 @@ async function madness(){
 }
 const MV='https://www.youtube.com/@maaalvin';
 // keyword responses: stored as SHA-256(keyword) -> XOR(text, keyword). Plain keywords are not in this file.
-const T={"9f55818a72148cbba87e3faf5b733d0bda50a7ab0b49954957b024bbfa24d030": {"a": "text", "c": "befca3c159b0efb1cda4cbb0efb1c6a4c541bedea3caa9dcbfeea2f6a9dcbedf5f54a9dbbfe3a3ca59b0e3b0f1a4c741bed953a4ceb1deb0f4a4ccb1d241a2f9a8e3bedf53a4c1b1d2b0fc54a9d6bed1a2fca9d9bfe5a2f4a9dfbed3a3c4a9dcbedf53a4ceb1dab1c6a5f8b0e24f53a4e4b1d041a3caa9d5bedca3ca59b0e1b0f2a4c4b1d04191f4ed41bedba3caa9d2bed5a3c454b0ecb1cd54a8ecbfe3a3ca59b0e9b0f1a4c74cbfe3a3ca59b1d9b1cea4c9b0e9b1cba4c2b1d04f"}, "16dc368a89b428b2485484313ba67a3912ca03f2b2b42429174a4f8b3dc84e44": {"a": "text", "c": "e1ade18410e0b0e08fe182e0b0e084e18c11e18fe18fe08ce0bfe0b3e08ce18e1d11e08be0b2e18f10e0bce1b3e18e11e18811e187e181e1b6e185e18d10e0bce1b3e18e11e188e18de1be11e086e180e0b9e089e0b4e0b1e08fe182e181e08ce18e11e187e185e084e0b1e0bd1e11e1ade18f10e18fe085e18de18f10e0bee1b0e18de18f10d3b1a411e18ae18fe082e184e1811de0b3e08f11e1bce0b2e18f10e0b6e1b3e18e1ce0b2e18f10e186e08ce180e0b6e089e18be18f1e"}, "e0b40776703d9edb4a79819475de9371c533789fa0bc1b9d4d8b525f6c631bb6": {"a": "shake", "c": "bdfda2e84fa6edbfc3b3d8a7d3bfc4b3d4a7d5bfc8b3d7573a2a3a312b573e2c32313c594dbfe2b3d1a7d6beffb2e7a7d84fa2e1bfc7bdd553b3d2a7d84fa3d7bfc2bdd4a3d3bfcebceda3d641"}, "4ed0608556890f1debeb0947b33bff409c18a80755422c362f4daa5cd5ce0749": {"a": "shake", "c": "002e0135f150506a606267606e6c676e6a51686a6b62689087f999ec95a183f991e0839ef06c416e6f516b6b5c635860659c013c01310000f0626d60659c000a0134000100020009013e000bff"}, "dbc6d50af10f342a53ef50c2034e4169a8b494f91f7b4a536eecf10a4962cbcd": {"a": "yt", "c": "bdf5bdf6b8edbdd24ca6d1bfecb1d3a6d7bed6b1d1a6d1bfefb1d9a6d2bfe24d4ca7e8bed0b1d4a6d5beddb0e2a7e0bed5b1d556b8eebdd1bcc1b9dcbddabcc3b9d4bdd1bdf4b9dbbddabdfab9d3bceabccf49bed7b1d2a6d4bfefb1d9a6d4bfef4f"}, "4f5b8766cc77dcf0670203e31a868592b13a1919026c7c046f4af654a766409d": {"a": "text", "c": "bfd345a2daa5e7bfdff0ceb1cab2df43bbdba0d0a2d8a5e8beecf0c2b1c1b3ee43bbdaa1e4a3e3a5e54fbe9fa0dfa8e3b1d8bbdaa0d1a3e0a5ebbfdcf0c8b0f64c41b3fabef3b5c6b0f849bfdef0cab1c3b3e2b2ebbfc0b4f0b1c1b9d24200a0d3a9d7b1d7bae350b5cab1c9b9d1be93a0d5a9d241b3d0bfc5b5c1b1ceb9d1be9ca1eaa8e3b1d8bbdaa0d8a2dca5e2bfd700a1e9a9d2b1d04bbfccb5ccb1c2b9dabfa250b1ceb2d1b3d4bef3b4f3b0f6b9d7bfa2a1ed59b3e7b3debfcfb5ccb0f3b9d5bfa350b0f8b2dfb3dabefbb4f0b1ccb9d64200a0dba9dcb0e1bbd1a1e5a3eaa4dc4fbe97a0d1a8e3b0e1bbdfa0d7a3eea5eb4fbfa2a0d4a9d3b0ec4bbfcfb5ccb1c2b9dfbe9ba0d4a8e0b0ef4bbfceb5c341a5e4beecf0ceb1c54c"}, "79d90a4f5e3870e4a464ee277a793c74f5180aa499380965a462ff1807048764": {"a": "bfly", "c": "b5fdbcd9b2c3b9dfb4ebbcd3b2ca49b1d4bcd2b9d9a3e5b0edbcd949b2cfb9d445bcd7b9d7a3ebb1d5bde2b8e05c49b1fbbcd1b9da52b8e2b5d7bcdcb3f0b9d4b5d7bcd142a2db41b4eebcdcb2cdb9dab4e7bcdc42a3e8b0e7bcd9b9dda2d141b5d44cb9dca3eb41b5d1bcd1b3f749b1d1bcdcb9d0a2d4b1db4cbcd4b2cab9dbb5dcbcd3b2cab8e445bcd4b9d5a2dbb1d0bdedb8e0a2d1b1dc42"}, "6e00cd562cc2d88e238dfb81d9439de7ec843ee9d0c9879d549cb1436786f975": {"a": "madness", "c": ""}, "5f537b80f1f2b7d1cc179dba8d36aa88463eda6ac11cb8e60a4583e1bd16aa3c": {"a": "madness", "c": ""}};
+const T={"9f55818a72148cbba87e3faf5b733d0bda50a7ab0b49954957b024bbfa24d030": {"a": "text", "c": "befca3c159b0efb1cda4cbb0efb1c6a4c541bedea3caa9dcbfeea2f6a9dcbedf5f54a9dbbfe3a3ca59b0e3b0f1a4c741bed953a4ceb1deb0f4a4ccb1d241a2f9a8e3bedf53a4c1b1d2b0fc54a9d6bed1a2fca9d9bfe5a2f4a9dfbed3a3c4a9dcbedf53a4ceb1dab1c6a5f8b0e24f53a4e4b1d041a3caa9d5bedca3ca59b0e1b0f2a4c4b1d04191f4ed41bedba3caa9d2bed5a3c454b0ecb1cd54a8ecbfe3a3ca59b0e9b0f1a4c74cbfe3a3ca59b1d9b1cea4c9b0e9b1cba4c2b1d04f"}, "16dc368a89b428b2485484313ba67a3912ca03f2b2b42429174a4f8b3dc84e44": {"a": "text", "c": "e1ade18410e0b0e08fe182e0b0e084e18c11e18fe18fe08ce0bfe0b3e08ce18e1d11e08be0b2e18f10e0bce1b3e18e11e18811e187e181e1b6e185e18d10e0bce1b3e18e11e188e18de1be11e086e180e0b9e089e0b4e0b1e08fe182e181e08ce18e11e187e185e084e0b1e0bd1e11e1ade18f10e18fe085e18de18f10e0bee1b0e18de18f10d3b1a411e18ae18fe082e184e1811de0b3e08f11e1bce0b2e18f10e0b6e1b3e18e1ce0b2e18f10e186e08ce180e0b6e089e18be18f1e"}, "e0b40776703d9edb4a79819475de9371c533789fa0bc1b9d4d8b525f6c631bb6": {"a": "shake", "c": "bdfda2e84fa6edbfc3b3d8a7d3bfc4b3d4a7d5bfc8b3d7573a2a3a312b573e2c32313c594dbfe2b3d1a7d6beffb2e7a7d84fa2e1bfc7bdd553b3d2a7d84fa3d7bfc2bdd4a3d3bfcebceda3d641"}, "4ed0608556890f1debeb0947b33bff409c18a80755422c362f4daa5cd5ce0749": {"a": "shake", "c": "002e0135f150506a606267606e6c676e6a51686a6b62689087f999ec95a183f991e0839ef06c416e6f516b6b5c635860659c013c01310000f0626d60659c000a0134000100020009013e000bff"}, "dbc6d50af10f342a53ef50c2034e4169a8b494f91f7b4a536eecf10a4962cbcd": {"a": "yt", "c": "bdf5bdf6b8edbdd24ca6d1bfecb1d3a6d7bed6b1d1a6d1bfefb1d9a6d2bfe24d4ca7e8bed0b1d4a6d5beddb0e2a7e0bed5b1d556b8eebdd1bcc1b9dcbddabcc3b9d4bdd1bdf4b9dbbddabdfab9d3bceabccf49bed7b1d2a6d4bfefb1d9a6d4bfef4f"}, "4f5b8766cc77dcf0670203e31a868592b13a1919026c7c046f4af654a766409d": {"a": "text", "c": "bfd345a2daa5e7bfdff0ceb1cab2df43bbdba0d0a2d8a5e8beecf0c2b1c1b3ee43bbdaa1e4a3e3a5e54fbe9fa0dfa8e3b1d8bbdaa0d1a3e0a5ebbfdcf0c8b0f64c41b3fabef3b5c6b0f849bfdef0cab1c3b3e2b2ebbfc0b4f0b1c1b9d24200a0d3a9d7b1d7bae350b5cab1c9b9d1be93a0d5a9d241b3d0bfc5b5c1b1ceb9d1be9ca1eaa8e3b1d8bbdaa0d8a2dca5e2bfd700a1e9a9d2b1d04bbfccb5ccb1c2b9dabfa250b1ceb2d1b3d4bef3b4f3b0f6b9d7bfa2a1ed59b3e7b3debfcfb5ccb0f3b9d5bfa350b0f8b2dfb3dabefbb4f0b1ccb9d64200a0dba9dcb0e1bbd1a1e5a3eaa4dc4fbe97a0d1a8e3b0e1bbdfa0d7a3eea5eb4fbfa2a0d4a9d3b0ec4bbfcfb5ccb1c2b9dfbe9ba0d4a8e0b0ef4bbfceb5c341a5e4beecf0ceb1c54c"}, "79d90a4f5e3870e4a464ee277a793c74f5180aa499380965a462ff1807048764": {"a": "bfly", "c": "b5fdbcd9b2c3b9dfb4ebbcd3b2ca49b1d4bcd2b9d9a3e5b0edbcd949b2cfb9d445bcd7b9d7a3ebb1d5bde2b8e05c49b1fbbcd1b9da52b8e2b5d7bcdcb3f0b9d4b5d7bcd142a2db41b4eebcdcb2cdb9dab4e7bcdc42a3e8b0e7bcd9b9dda2d141b5d44cb9dca3eb41b5d1bcd1b3f749b1d1bcdcb9d0a2d4b1db4cbcd4b2cab9dbb5dcbcd3b2cab8e445bcd4b9d5a2dbb1d0bdedb8e0a2d1b1dc42"}, "6e00cd562cc2d88e238dfb81d9439de7ec843ee9d0c9879d549cb1436786f975": {"a": "madness", "c": ""}, "5f537b80f1f2b7d1cc179dba8d36aa88463eda6ac11cb8e60a4583e1bd16aa3c": {"a": "madness", "c": ""}, "37fdd305c05999f746658226e0b25a149cd1111c29a22f393273ea7c38a27bc1": {"a": "archive", "c": "39174317022b1f0c565f424e25262610535945454a091902062f1f0c5d474e4c43070e2c104b4e45403e0413073e100c54110a0512430e31071b0d450b0241170e32030515110742091706335f4916090d0f0a4308301d0f1d024e4c0a0612281c1b1045000000000000000000004c4e4d4349331a071f47584c4341477f510801010b0343594b7d511429"}};
 const enc=s=>new TextEncoder().encode(s);
 const b2=h=>Uint8Array.from(h.match(/../g)||[],x=>parseInt(x,16));
 const h2=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -359,6 +512,15 @@ async function act(a,p){
   else if(a==='madness'){await madness()}
   else if(a==='bfly'){say(p,'o');await butterflies()}
   else if(a==='yt'){window.open(MV,'_blank','noopener');const l=say(p,'o'),x=document.createElement('a');x.href=MV;x.target='_blank';x.rel='noopener';x.textContent='youtube.com/@maaalvin';x.onclick=ev=>{ev.preventDefault();window.open(MV,'_blank','noopener')};l.append(' ',x)}
+  else if(a==='archive'){
+    const box=$('#arcbody');box.replaceChildren();
+    let items=[];try{items=JSON.parse(p)}catch(err){say('ARCHIVE: data error','e');return}
+    items.forEach(it=>{const card=document.createElement('div');card.className='acard';const h=document.createElement('h3');h.textContent=it.title||'';const d=document.createElement('p');d.textContent=it.desc||'';card.append(h,d);
+      if(it.audio){const au=document.createElement('audio');au.controls=true;au.preload='none';au.src=it.audio;card.appendChild(au)}
+      if(it.link){const l=document.createElement('a');l.href=it.link;l.target='_blank';l.rel='noopener';l.textContent='open';card.appendChild(l)}
+      box.appendChild(card)});
+    const s=$('#archive');s.hidden=false;requestAnimationFrame(()=>s.classList.add('show'));s.scrollIntoView({behavior:RM?'auto':'smooth'});say('archive unlocked.','o');
+  }
   else say(p,'o');
 }
 $('#tf').onsubmit=async e=>{
