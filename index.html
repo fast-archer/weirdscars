@@ -275,6 +275,8 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 .acard{margin-top:0}
 .acard img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--ln);filter:grayscale(.2) contrast(1.05);margin-bottom:12px}
 @media(max-width:767px){#bgv{display:none}}
+/* release modal: the box never leaves the screen; long press text scrolls inside it */
+.rm-box{max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
 </style>
 </head>
 <body>
