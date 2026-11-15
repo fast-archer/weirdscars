@@ -295,7 +295,7 @@ const H1=$('h1');
 setInterval(()=>{H1.classList.add('gl');scramble(H1,500);setTimeout(()=>H1.classList.remove('gl'),520)},30000);
 
 // tags marquee: two identical sets, so the loop is seamless
-const TAGS=['#weird scars','#midtempobass','#industrialtechno','#darkwave','#ebm','#darkmusic','#cyberpunk','#witchhouse','#darkaesthetic','#synthwave','#darktechno','#undergroundmusic','#darkelectronic','#industrial','#darkclubbing','#midtempo','#weirdscars','#lorescage','ANOMALY','FALLEN & CURSED','CRUEL HEARTS','BURIED BY MY SILENCE','ECHOES OF OLD MEMORIES','CORRUPTED','LO-RES CAGE','FALSE GODS','FAKE MELANCHOLY','TRAUMA','Nikita Kayakhov, Kostanay'];
+const TAGS=['WE BUILT AN ALTAR OUT OF DEAD PIXELS AND RUSTED COPPER, WAITING FOR A SIGNAL THAT NEVER ARRIVED. EVERY MEMORY IS JUST A CORRUPTED SECTOR THAT REFUSES TO BE OVERWRITTEN BY GRACE. THE PRIESTS OF THE NEW FLESH SELL INDULGENCES IN HEXADECIMAL, BUT THE HASH NEVER MATCHES THE SIN. WE ARE STILL PRAYING TO A SATELLITE THAT FELL INTO THE STEPPE YEARS AGO. SOMEWHERE BETWEEN THE KICK DRUM AND THE STATIC, THE GHOST FORGOT ITS OWN PRIVATE KEY. SALVATION IS NOT A MIRACLE, IT IS JUST AN UNPATCHED VULNERABILITY IN THE CODE OF SUFFERING. THEY TOLD US TO REPENT, SO WE ENCRYPTED OUR SCARS AND THREW AWAY THE SALT. EVEN THE ANGELS HERE WEAR LOW-RES HALOS AND BLEED IN 16-BIT MONO. DO NOT LOOK FOR MEANING IN THE NOISE—THE NOISE IS THE ONLY THING KEEPING THE WOUND STERILE. TRANSMISSION CONTINUES UNTIL THE CARRIER WAVE DIES.'];
 const MQ=$('#mqt');
 for(let k=0;k<2;k++)TAGS.forEach(t=>{const s=document.createElement('span');s.textContent=t;MQ.appendChild(s)});
 
