@@ -134,7 +134,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
 <main id="top">
   <section class="hero">
     <video id="bgv" autoplay muted loop playsinline preload="metadata" src="assets/bg.mp4"></video>
-    <div class="meta ml">BEST VIEWED 1024×768<br>KOSTANAY, KZ</div>
+    <div class="meta ml">> SYS.ONLINE<br>> SIGNAL: KZ / KOSTANAY</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
     <p class="lab">Electronic music producer · artist</p>
     <h1>WEIRD SCARS</h1>
@@ -233,7 +233,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   </section>
 </main>
 
-<footer><span>© 2026 WEIRD SCARS</span><span>made in kostanay · best viewed in 1024×768</span></footer>
+<footer><span>© 2026 WEIRD SCARS</span><span>[ kostanay.kz ] // weirdscars © 2026 // no tracking</span></footer>
 
 <script>
 (()=>{
@@ -247,7 +247,7 @@ const TARGET=Date.parse(RELEASE.at),CD=$('#cd');
 let kz;
 try{kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Qostanay',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
 catch(e){kz=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Almaty',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
-const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='KOSTANAY, KZ '+kz.format(new Date())};
+const tick=()=>{const d=TARGET-Date.now();if(d>0){const s=Math.floor(d/1e3);CD.textContent=RELEASE.label+' '+Math.floor(s/86400)+'d '+pad(Math.floor(s%86400/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)}else CD.textContent='> SIGNAL LOCKED // KOSTANAY, KZ '+kz.format(new Date())};
 tick();setInterval(tick,1000);
 
 // releases: cover + BandLink
@@ -340,45 +340,43 @@ async function butterflies(){
   for(let i=0;i<8;i++){pre.textContent=(i%2?FB:FA).join('\n');OUT.scrollTop=OUT.scrollHeight;await wait(320)}
   say('the butterflies flew away.','o');
 }
-const LN=['load /smp/steppe_kick_07.wav','ERR 0x7FA2 ch:3 buffer overrun','0100 1011 0011 1101','function glitch(){return null}','render_frame(TRAUMA, 0x00)','sample: kaz_wind_loop.flac [LOST]','key ??? -> 0xDE 0xAD 0xBE 0xEF'];
+const LN=['load /smp/steppe_kick_07.wav','ERR 0x7FA2 ch:3 buffer overrun','0100 1011 0011 1101','function glitch(){return null}','render_frame(0x00)','sample: kaz_wind_loop.flac [LOST]','key ??? -> 0xDE 0xAD 0xBE 0xEF'];
 async function madness(){
   const cs='0123456789ABCDEF#$%&*<>[]{}';shake();
   for(let i=0;i<32;i++){let s='';for(let j=0;j<44;j++)s+=cs[Math.random()*cs.length|0];say(i%4?s:LN[i%LN.length],'e');await wait(60)}
   say('signal restored.','o');
 }
-const NS='Не совсем понятно, кто это и зачем это имя зашифровано здесь. Но одно ясно — когда-то это что-то значило.';
-const MO='Вы разозлили WEIRD SCARS. Больше так не делайте.';
-const MA='Друг исполнителя, снимающий развлекательный контент.';
-const OP='У любого действия есть последствия. Будь аккуратен, ведь иногда легкомысленный шаг может запустить цепочку событий, которые заставят тебя пожалеть об этом.';
-const EL='Бабочки больше не летают. Они улетели в теплые степи и от них давно никаких известий.';
 const MV='https://www.youtube.com/@maaalvin';
-
+// keyword responses: stored as SHA-256(keyword) -> XOR(text, keyword). Plain keywords are not in this file.
+const T={"9f55818a72148cbba87e3faf5b733d0bda50a7ab0b49954957b024bbfa24d030": {"a": "text", "c": "befca3c159b0efb1cda4cbb0efb1c6a4c541bedea3caa9dcbfeea2f6a9dcbedf5f54a9dbbfe3a3ca59b0e3b0f1a4c741bed953a4ceb1deb0f4a4ccb1d241a2f9a8e3bedf53a4c1b1d2b0fc54a9d6bed1a2fca9d9bfe5a2f4a9dfbed3a3c4a9dcbedf53a4ceb1dab1c6a5f8b0e24f53a4e4b1d041a3caa9d5bedca3ca59b0e1b0f2a4c4b1d04191f4ed41bedba3caa9d2bed5a3c454b0ecb1cd54a8ecbfe3a3ca59b0e9b0f1a4c74cbfe3a3ca59b1d9b1cea4c9b0e9b1cba4c2b1d04f"}, "16dc368a89b428b2485484313ba67a3912ca03f2b2b42429174a4f8b3dc84e44": {"a": "text", "c": "e1ade18410e0b0e08fe182e0b0e084e18c11e18fe18fe08ce0bfe0b3e08ce18e1d11e08be0b2e18f10e0bce1b3e18e11e18811e187e181e1b6e185e18d10e0bce1b3e18e11e188e18de1be11e086e180e0b9e089e0b4e0b1e08fe182e181e08ce18e11e187e185e084e0b1e0bd1e11e1ade18f10e18fe085e18de18f10e0bee1b0e18de18f10d3b1a411e18ae18fe082e184e1811de0b3e08f11e1bce0b2e18f10e0b6e1b3e18e1ce0b2e18f10e186e08ce180e0b6e089e18be18f1e"}, "e0b40776703d9edb4a79819475de9371c533789fa0bc1b9d4d8b525f6c631bb6": {"a": "shake", "c": "bdfda2e84fa6edbfc3b3d8a7d3bfc4b3d4a7d5bfc8b3d7573a2a3a312b573e2c32313c594dbfe2b3d1a7d6beffb2e7a7d84fa2e1bfc7bdd553b3d2a7d84fa3d7bfc2bdd4a3d3bfcebceda3d641"}, "4ed0608556890f1debeb0947b33bff409c18a80755422c362f4daa5cd5ce0749": {"a": "shake", "c": "002e0135f150506a606267606e6c676e6a51686a6b62689087f999ec95a183f991e0839ef06c416e6f516b6b5c635860659c013c01310000f0626d60659c000a0134000100020009013e000bff"}, "dbc6d50af10f342a53ef50c2034e4169a8b494f91f7b4a536eecf10a4962cbcd": {"a": "yt", "c": "bdf5bdf6b8edbdd24ca6d1bfecb1d3a6d7bed6b1d1a6d1bfefb1d9a6d2bfe24d4ca7e8bed0b1d4a6d5beddb0e2a7e0bed5b1d556b8eebdd1bcc1b9dcbddabcc3b9d4bdd1bdf4b9dbbddabdfab9d3bceabccf49bed7b1d2a6d4bfefb1d9a6d4bfef4f"}, "4f5b8766cc77dcf0670203e31a868592b13a1919026c7c046f4af654a766409d": {"a": "text", "c": "bfd345a2daa5e7bfdff0ceb1cab2df43bbdba0d0a2d8a5e8beecf0c2b1c1b3ee43bbdaa1e4a3e3a5e54fbe9fa0dfa8e3b1d8bbdaa0d1a3e0a5ebbfdcf0c8b0f64c41b3fabef3b5c6b0f849bfdef0cab1c3b3e2b2ebbfc0b4f0b1c1b9d24200a0d3a9d7b1d7bae350b5cab1c9b9d1be93a0d5a9d241b3d0bfc5b5c1b1ceb9d1be9ca1eaa8e3b1d8bbdaa0d8a2dca5e2bfd700a1e9a9d2b1d04bbfccb5ccb1c2b9dabfa250b1ceb2d1b3d4bef3b4f3b0f6b9d7bfa2a1ed59b3e7b3debfcfb5ccb0f3b9d5bfa350b0f8b2dfb3dabefbb4f0b1ccb9d64200a0dba9dcb0e1bbd1a1e5a3eaa4dc4fbe97a0d1a8e3b0e1bbdfa0d7a3eea5eb4fbfa2a0d4a9d3b0ec4bbfcfb5ccb1c2b9dfbe9ba0d4a8e0b0ef4bbfceb5c341a5e4beecf0ceb1c54c"}, "79d90a4f5e3870e4a464ee277a793c74f5180aa499380965a462ff1807048764": {"a": "bfly", "c": "b5fdbcd9b2c3b9dfb4ebbcd3b2ca49b1d4bcd2b9d9a3e5b0edbcd949b2cfb9d445bcd7b9d7a3ebb1d5bde2b8e05c49b1fbbcd1b9da52b8e2b5d7bcdcb3f0b9d4b5d7bcd142a2db41b4eebcdcb2cdb9dab4e7bcdc42a3e8b0e7bcd9b9dda2d141b5d44cb9dca3eb41b5d1bcd1b3f749b1d1bcdcb9d0a2d4b1db4cbcd4b2cab9dbb5dcbcd3b2cab8e445bcd4b9d5a2dbb1d0bdedb8e0a2d1b1dc42"}, "6e00cd562cc2d88e238dfb81d9439de7ec843ee9d0c9879d549cb1436786f975": {"a": "madness", "c": ""}, "5f537b80f1f2b7d1cc179dba8d36aa88463eda6ac11cb8e60a4583e1bd16aa3c": {"a": "madness", "c": ""}};
+const enc=s=>new TextEncoder().encode(s);
+const b2=h=>Uint8Array.from(h.match(/../g)||[],x=>parseInt(x,16));
+const h2=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const xr=(a,k)=>a.map((x,i)=>x^k[i%k.length]);
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
+async function act(a,p){
+  if(a==='shake'){shake();say(p,'e')}
+  else if(a==='madness'){await madness()}
+  else if(a==='bfly'){say(p,'o');await butterflies()}
+  else if(a==='yt'){window.open(MV,'_blank','noopener');const l=say(p,'o'),x=document.createElement('a');x.href=MV;x.target='_blank';x.rel='noopener';x.textContent='youtube.com/@maaalvin';x.onclick=ev=>{ev.preventDefault();window.open(MV,'_blank','noopener')};l.append(' ',x)}
+  else say(p,'o');
+}
 $('#tf').onsubmit=async e=>{
   e.preventDefault();
   const raw=TI.value.trim();TI.value='';if(!raw)return;
-  const v=raw.toLowerCase().replace(/\s+/g,' ');
+  const v=norm(raw);
   say('> '+raw);
   if(v==='help'){say('commands: help, clear. or type a key / keyword.');return}
   if(v==='clear'){OUT.innerHTML='';return}
-  if(v==='nastya'||v==='101'){say(NS);return}
-  if(v==='moscow'||v==='москва'){shake();say(MO,'e');return}
-  if(v==='malvin'){
-    window.open(MV,'_blank','noopener');
-    const p=say(MA,'o'),a=document.createElement('a');
-    a.href=MV;a.target='_blank';a.rel='noopener';a.textContent='youtube.com/@maaalvin';
-    a.onclick=ev=>{ev.preventDefault();window.open(MV,'_blank','noopener')};
-    p.append(' ',a);return;
-  }
-  if(v==='operation payback'){say(OP,'o');return}
-  if(v==='ellibria'){say(EL,'o');await butterflies();return}
-  if(v==='matrix'||v==='leak'){await madness();return}
   if(!crypto.subtle){say('ERROR: https required','e');return}
   try{
-    const key=new TextEncoder().encode(raw.toUpperCase());
-    const bytes=Uint8Array.from(HEX.split(' '),h=>parseInt(h,16));
+    const h=h2(await crypto.subtle.digest('SHA-256',enc(v)));
+    if(T[h]){const p=new TextDecoder().decode(xr(b2(T[h].c),enc(v)));await act(T[h].a,p);return}
+    const key=enc(raw.toUpperCase());
+    const bytes=Uint8Array.from(HEX.split(' '),x=>parseInt(x,16));
     const out=bytes.map((b,i)=>b^key[i%key.length]);
     const d=new Uint8Array(await crypto.subtle.digest('SHA-256',out));
-    if([...d].map(b=>b.toString(16).padStart(2,'0')).join('')===HASH){say('ACCESS GRANTED','o');say(new TextDecoder().decode(out),'o')}
+    if(h2(d)===HASH){say('ACCESS GRANTED','o');say(new TextDecoder().decode(out),'o')}
     else say('ACCESS DENIED: signature mismatch','e');
   }catch(err){say('ERROR: '+err.message,'e')}
 };
