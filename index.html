@@ -7,6 +7,15 @@
 <title>WEIRD SCARS</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://music-bandlink.s3.yandex.net; media-src 'self'; frame-src https://open.spotify.com; connect-src 'self' https://api.web3forms.com https://buttondown.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WEIRD SCARS">
+<meta property="og:title" content="WEIRD SCARS — TRAUMA">
+<meta property="og:description" content="Electro-Darkwave / Post-Witch House. Kostanay, KZ. Out 18.11.">
+<meta property="og:url" content="https://weirdscars.com/">
+<meta property="og:image" content="https://weirdscars.com/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -91,6 +100,20 @@ input:not(#ti):focus,textarea:focus{outline:none;border-color:var(--bl)}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--ln);font-family:var(--mo);font-size:10px;letter-spacing:.14em;color:var(--mu)}
 @media(min-width:800px){.about{grid-template-columns:1fr 300px}}
 @media(max-width:640px){.ml{display:none}.mr{top:78px}}
+.pl{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pl a{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--ln);text-decoration:none;font-family:var(--mo);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.pl a:hover{border-color:#fff}
+.bd{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--bl);border-radius:50%;color:var(--bl);font-size:9px;font-weight:500}
+.so{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.so a{display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--ln);border-radius:50%;color:#fff;text-decoration:none;font-family:var(--mo);font-size:11px}
+.so a:hover{border-color:var(--bl);color:var(--bl)}
+.nl{display:flex;gap:8px;max-width:520px;margin-top:22px}
+.nl input{flex:1;min-width:0;padding:12px;background:#050608;border:1px solid var(--ln);color:#fff;font:inherit;font-size:16px}
+.nl input:focus{outline:none;border-color:var(--bl)}
+.nl button{padding:12px 18px;border:1px solid #fff;background:none;color:#fff;font-family:var(--mo);font-size:12px;letter-spacing:.12em;cursor:pointer}
+.nl button:hover{background:#fff;color:#000}
+#ns{min-height:16px;margin-top:10px;font-family:var(--mo);font-size:11px;color:var(--mu)}
+.sp{display:block;margin-top:22px;border:1px solid var(--ln);border-radius:0}
 .hl{position:relative;isolation:isolate}
 .hl::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(90deg,transparent calc(var(--x,50%) - 1px),rgba(127,184,255,.35) var(--x,50%),transparent calc(var(--x,50%) + 1px)),linear-gradient(180deg,transparent calc(var(--y,50%) - 1px),rgba(127,184,255,.35) var(--y,50%),transparent calc(var(--y,50%) + 1px)),radial-gradient(160px circle at var(--x,50%) var(--y,50%),rgba(127,184,255,.12),transparent 70%)}
 .hl:hover::before{opacity:1}
@@ -139,6 +162,19 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     <div class="ctl"><button id="prev" type="button">← PREV</button><button id="next" type="button">NEXT →</button></div>
   </section>
 
+  <section id="listen">
+    <p class="lab">Listen</p>
+    <div class="pl">
+      <a href="https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied" target="_blank" rel="noopener"><span class="bd">SP</span>Spotify</a>
+      <a href="https://music.yandex.kz/artist/25074932" target="_blank" rel="noopener"><span class="bd">YM</span>Yandex Music</a>
+      <a href="https://vk.com/artist/weirdscars" target="_blank" rel="noopener"><span class="bd">VK</span>VK Music</a>
+      <a href="https://music.youtube.com/channel/UCq-DujCWcyDwpaJNs92z-nA" target="_blank" rel="noopener"><span class="bd">YT</span>YouTube Music</a>
+      <a href="https://music.apple.com/kz/artist/1858673938" target="_blank" rel="noopener"><span class="bd">AM</span>Apple Music</a>
+      <a href="https://soundcloud.com/weirdscars" target="_blank" rel="noopener"><span class="bd">SC</span>SoundCloud</a>
+    </div>
+    <iframe class="sp" src="https://open.spotify.com/embed/artist/3WEdQL1RspwjtFcIFVdied" width="100%" height="352" loading="lazy" allow="encrypted-media" title="Spotify player"></iframe>
+  </section>
+
   <div class="mq"><div class="mqt" id="mqt"></div></div>
 
   <section id="booking">
@@ -146,6 +182,21 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
     <h2>Live &amp; booking</h2>
     <p class="lede">Live sets, bookings and press. Write through the form below or to weirdscars.connect@gmail.com</p>
     <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
+  </section>
+
+  <section id="follow">
+    <p class="lab">Follow</p>
+    <div class="so">
+      <a href="https://t.me/weird_scars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a>
+      <a href="https://vk.com/weird_scars" target="_blank" rel="noopener" aria-label="VK" title="VK">VK</a>
+      <a href="https://www.youtube.com/@weirdscars" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">YT</a>
+      <a href="https://www.tiktok.com/@weirdscars" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">TT</a>
+      <a href="https://www.instagram.com/weird.scars/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">IG</a>
+    </div>
+    <h2 style="margin-top:44px">Newsletter</h2>
+    <p class="lede">New releases and live dates. Nothing else.</p>
+    <form class="nl" id="nl"><input type="email" name="email" placeholder="your@email" required aria-label="email"><button type="submit">Subscribe</button></form>
+    <div id="ns"></div>
   </section>
 
   <section id="cipher">
@@ -246,6 +297,14 @@ const TAGS=['#weird scars','#midtempobass','#industrialtechno','#darkwave','#ebm
 const MQ=$('#mqt');
 for(let k=0;k<2;k++)TAGS.forEach(t=>{const s=document.createElement('span');s.textContent=t;MQ.appendChild(s)});
 
+// newsletter via Buttondown (paste your username). Embed endpoint is cross-origin, so the response is opaque.
+const BUTTONDOWN='';
+$('#nl').onsubmit=async e=>{
+  e.preventDefault();const st=$('#ns');
+  if(!BUTTONDOWN){st.textContent='newsletter not configured yet.';return}
+  try{await fetch('https://buttondown.com/api/emails/embed-subscribe/'+BUTTONDOWN,{method:'POST',mode:'no-cors',body:new FormData(e.target)});st.textContent='subscribed. check your email.';e.target.reset()}
+  catch(err){st.textContent='subscribe failed. try again later.'}
+};
 // contact: Web3Forms (free, delivers to weirdscars.connect@gmail.com). Paste your access key below.
 const WEB3KEY='b362e1dd-f001-4f7b-8b07-f2ee51dd4809';
 $('#cf').onsubmit=async e=>{
