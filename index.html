@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="WEIRD SCARS — electronic music producer and artist from Kazakhstan. Electro-Darkwave / Post-Witch House.">
 <title>WEIRD SCARS</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -142,8 +144,8 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   <section id="booking">
     <p class="lab">03 / Live</p>
     <h2>Live &amp; booking</h2>
-    <p class="lede">Live sets, bookings and press: weirdscars.connect@gmail.com</p>
-    <div class="btns"><a class="btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=weirdscars.connect@gmail.com" target="_blank" rel="noopener">Write an email</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
+    <p class="lede">Live sets, bookings and press. Write through the form below or to weirdscars.connect@gmail.com</p>
+    <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="https://t.me/weird_scars" target="_blank" rel="noopener">Telegram</a></div>
   </section>
 
   <section id="cipher">
@@ -167,9 +169,8 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding
   <section id="contact">
     <p class="lab">05 / Contact</p>
     <h2>Direct link</h2>
-    <form id="cf" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact">
-      <p hidden><input name="bot-field"></p>
+    <form id="cf">
+      <input type="checkbox" name="botcheck" style="display:none">
       <label>Alias / Name<input name="name" required></label>
       <label>Contact (email / Telegram)<input name="contact" required></label>
       <label>Message<textarea name="message" rows="4"></textarea></label>
@@ -245,13 +246,19 @@ const TAGS=['#weird scars','#midtempobass','#industrialtechno','#darkwave','#ebm
 const MQ=$('#mqt');
 for(let k=0;k<2;k++)TAGS.forEach(t=>{const s=document.createElement('span');s.textContent=t;MQ.appendChild(s)});
 
-// contact: Netlify Forms (no backend). Submissions show up in the Netlify dashboard and can be emailed.
+// contact: Web3Forms (free, delivers to weirdscars.connect@gmail.com). Paste your access key below.
+const WEB3KEY='b362e1dd-f001-4f7b-8b07-f2ee51dd4809';
 $('#cf').onsubmit=async e=>{
-  e.preventDefault();const st=$('#cs');st.textContent='transmitting...';
+  e.preventDefault();const st=$('#cs');
+  if(WEB3KEY.startsWith('PASTE')){st.textContent='form not configured yet.';return}
+  st.textContent='transmitting...';
+  const f=new FormData(e.target);
+  const body={access_key:WEB3KEY,subject:'WEIRD SCARS signal',name:f.get('name'),contact:f.get('contact'),message:f.get('message'),botcheck:f.get('botcheck')||''};
   try{
-    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(e.target)).toString()});
-    st.textContent=r.ok?'signal received.':'transmission failed.';if(r.ok)e.target.reset();
-  }catch(err){st.textContent='transmission failed (works after deploy).'}
+    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+    const j=await r.json();
+    st.textContent=j.success?'signal received.':'transmission failed.';if(j.success)e.target.reset();
+  }catch(err){st.textContent='transmission failed. check connection.'}
 };
 
 // terminal
