@@ -229,7 +229,7 @@ body{padding-bottom:60px}
 .rm-back{justify-self:start;margin-bottom:14px;padding:6px 10px;background:none;border:1px solid var(--ln);color:var(--mu);font-family:var(--mo);font-size:11px;letter-spacing:.12em;cursor:pointer}
 .rm-back:hover{color:#fff;border-color:#fff}
 .rm-page h3{font-family:var(--hd);font-size:20px;margin:0 0 10px}
-.rm-page .lede{font-size:14px;margin:0}
+.rm-page .lede{font-size:14px;margin:0;white-space:pre-line;line-height:1.7}
 .rm-tracks{margin:16px 0 0;padding:0;list-style:none;font-family:var(--mo);font-size:12px;line-height:1.9;color:#cfd5de;counter-reset:tr}
 .rm-tracks li{counter-increment:tr;padding:4px 0;border-bottom:1px solid var(--ln)}
 .rm-tracks li::before{content:counter(tr,decimal-leading-zero) "  ";color:var(--bl)}
@@ -246,7 +246,7 @@ body{padding-bottom:60px}
 @keyframes eqb{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
 @media(prefers-reduced-motion:reduce){.eq i{animation:none!important;transform:scaleY(.6)}}
 /* burger: plus rotates into an X; glitch from the script every 6 s */
-header .burger{padding:0;align-items:center;justify-content:center}
+header .burger{padding:0;align-items:center;justify-content:center;color:#fff}
 header .burger svg{width:26px;height:26px;overflow:visible}
 header .burger svg g{transform-origin:20px 20px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 header .burger[aria-expanded="true"] svg g{transform:rotate(45deg)}
@@ -274,6 +274,7 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 @media(min-width:1000px){.arcbody{grid-template-columns:repeat(3,1fr)}}
 .acard{margin-top:0}
 .acard img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--ln);filter:grayscale(.2) contrast(1.05);margin-bottom:12px}
+@media(max-width:767px){#bgv{display:none}}
 </style>
 </head>
 <body>
@@ -284,7 +285,7 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
   <nav>
     <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
   </nav>
-  <div class="hicons"><a href="https://t.me/weird_scars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a><a href="https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify">SP</a></div>
+  <div class="hicons"><a href="https://t.me/weirdscars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a><a href="https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify">SP</a></div>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
     <svg viewBox="0 0 40 40" aria-hidden="true"><g><path d="M20 9v22M9 20h22" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" fill="none"/></g></svg>
   </button>
@@ -313,9 +314,9 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
     <div class="lr-info">
       <h2>TRAUMA</h2>
       <p class="lab">Out 18.11.2026 · 00:00 Kostanay time</p>
-      <p class="lede">Electro-Darkwave / Post-Witch House. Cold, damaged, digital.</p>
+      <p class="lede">Electro-darkwave / post-witch house single. Out 18 November 2026.</p>
       <p class="lab" id="lr-cd"></p>
-      <div class="btns"><button class="btn" id="lr-play" type="button">Play preview</button></div>
+      <div class="btns"><button class="btn" id="lr-play" type="button">Play preview</button><a class="btn" href="https://band.link/amuart" target="_blank" rel="noopener">Pre-save</a></div>
       <div class="pl">
         <a href="https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied" target="_blank" rel="noopener"><span class="bd">SP</span>Spotify</a>
         <a href="https://music.apple.com/kz/artist/1858673938" target="_blank" rel="noopener"><span class="bd">AM</span>Apple Music</a>
@@ -372,13 +373,13 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
     <p class="lab">03 / Live</p>
     <h2>Live &amp; booking</h2>
     <p class="lede">Live sets, bookings and press. Write through the form below or to weirdscars.connect@gmail.com</p>
-    <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="https://t.me/weirdscars" target="_blank" rel="noopener">Telegram</a></div>
+    <div class="btns"><a class="btn" href="#contact">Send a message</a><a class="btn" href="assets/presskit.zip" download>Press kit</a><a class="btn" href="https://t.me/weirdscars" target="_blank" rel="noopener">Telegram</a></div>
   </section>
 
   <section id="follow">
     <p class="lab">Follow</p>
     <div class="so">
-      <a href="https://t.me/weird_scars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a>
+      <a href="https://t.me/weirdscars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a>
       <a href="https://vk.com/weird_scars" target="_blank" rel="noopener" aria-label="VK" title="VK">VK</a>
       <a href="https://www.youtube.com/@weirdscars" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">YT</a>
       <a href="https://www.tiktok.com/@weirdscars" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">TT</a>
@@ -586,7 +587,7 @@ $('#cnt-rel').textContent=R.length;$('#cnt-plat').textContent=document.querySele
 // release modal: the page view slides over the face inside the same dialog, the player keeps playing
 const RMD=$('#rm'),RMB=RMD.querySelector('.rm-box');
 // per-release details, fill with real data only: desc (string), tracks (array of titles), links (optional: spotify, apple, yandex, soundcloud)
-const RMETA={'TRAUMA':{desc:'',tracks:[],links:{}}};
+const RMETA={'TRAUMA':{desc:"FOR IMMEDIATE RELEASE\n\nElectronic music producer WEIRD SCARS returns with his most immersive and unforgiving work to date, the dark electro-darkwave / post-witch house single, \"TRAUMA\". Built on a foundation of cold, damaged digital aesthetics, the track serves as a sonic dissection of psychological breaking points. It explores how deep personal injuries do not merely destroy us, but fundamentally transform and reshape our inner architecture.\n\nRather than seeking a clean escape from pain, \"TRAUMA\" confronts the shadows head-on, forcing an uncomfortable yet liberating embrace of one's darker side. The soundscape mirrors this harsh realization, blending heavy rhythmic pulses with freezing synth textures that feel both futuristic and deeply archaic. It is an acknowledgment that healing is an illusion, and that true survival begins the moment you accept you will never be the same again.\n\nThe production strips away all superficial gloss, leaving behind a raw, bleeding digital footprint that echoes the isolation of a frozen urban night. Every beat and glitch acts as a deliberate scar, permanently etched into the master recording to document the metamorphosis. This release marks a pivotal evolution for the artist, pushing further into the abyss of post-witch house experimentation. \"TRAUMA\" is not designed to comfort the listener, but to validate the internal decay and the strength found within it.\n\nThe single drops on November 18, 2026, via major streaming platforms. Prepare to interface with the damage and listen to the signal at full volume.",tracks:[],links:{spotify:'https://band.link/amuart',apple:'https://band.link/amuart',yandex:'https://band.link/amuart'}}};
 const RPLAT=[['spotify','SP','Spotify','https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied'],['apple','AM','Apple Music','https://music.apple.com/kz/artist/1858673938'],['yandex','YM','Yandex Music','https://music.yandex.kz/artist/25074932'],['soundcloud','SC','SoundCloud','https://soundcloud.com/weirdscars']];
 function openRel(t,u,c){
   const m=RMETA[t]||{},lk=m.links||{};
