@@ -29,7 +29,7 @@ h1,h2{font-family:var(--hd);font-weight:800;margin:0;line-height:1.05}
 h2{font-size:clamp(24px,5vw,40px);margin-bottom:16px}
 .lab{font-family:var(--mo);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin:0 0 14px}
 .lede{margin:0;max-width:640px;color:#b8bec7;line-height:1.7}
-header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:12px;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--ln)}
+header{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--ln)}
 .logo{width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0}
 .brand{font-family:var(--hd);font-weight:800;font-size:14px;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0}
 nav{display:flex;gap:14px;margin-left:auto;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;font-family:var(--mo);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
@@ -176,9 +176,7 @@ form.sending button{animation:pulse 1s ease-in-out infinite;pointer-events:none;
 .acard audio{display:block;width:100%;margin:8px 0 0}
 /* mobile menu: y2k burger and full-screen list */
 header .burger{display:none;flex-direction:column;justify-content:center;align-items:center;width:42px;height:42px;padding:0;margin-left:auto;flex-shrink:0;background:#000;border:1px solid #fff;cursor:pointer}
-header .burger i{display:block;width:18px;height:2px;margin:3px 0;background:#fff;transition:transform .3s,opacity .3s}
 header .burger i:nth-child(2){transform:translateX(4px);background:var(--bl)}
-header .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(5px) rotate(45deg)}
 header .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
 header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
 .mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:24px 28px;background:rgba(0,0,0,.97);opacity:0;pointer-events:none;transition:opacity .35s ease}
@@ -189,20 +187,90 @@ header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) r
 @media(max-width:767px){nav{display:none}header .burger{display:flex}}
 @media(min-width:768px){.mnav{display:none}}
 @media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+/* header icons, burger as crosshair that turns into X */
+.hicons{display:flex;gap:8px;flex-shrink:0}
+.hicons a{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--ln);border-radius:50%;color:#fff;text-decoration:none;font-family:var(--mo);font-size:10px}
+.hicons a:hover{border-color:var(--bl);color:var(--bl)}
+header .burger .x{opacity:0;transition:opacity .25s}
+header .burger .t{transition:opacity .25s}
+header .burger[aria-expanded="true"] .t{opacity:0}
+header .burger[aria-expanded="true"] .x{opacity:1}
+header .burger[aria-expanded="true"] .c{stroke:var(--bl)}
+header .burger svg{width:26px;height:26px}
+.mnav .mnx{position:absolute;top:14px;right:16px;padding:6px 12px;background:none;border:0;color:#fff;font-size:34px;line-height:1;cursor:pointer}
+/* latest release */
+.latest{padding-top:clamp(40px,8vw,70px)}
+.lr{display:grid;gap:24px;margin-top:20px}
+.lr img{width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;border:1px solid var(--ln)}
+.lr-info .btns{margin-top:18px}
+@media(min-width:800px){.lr{grid-template-columns:420px 1fr;align-items:center}}
+/* system log */
+.logbox p{font-family:var(--mo);font-size:13px;line-height:1.7;color:#cfd5de;margin:0 0 14px;padding-left:12px;border-left:1px solid var(--bl)}
+/* global player: fixed bottom bar, volume capped at 20 % */
+body{padding-bottom:60px}
+.gp{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.94);border-top:1px solid var(--ln);font-family:var(--mo);font-size:11px;letter-spacing:.12em}
+.gp button{width:34px;height:34px;flex-shrink:0;background:none;border:1px solid #fff;color:#fff;cursor:pointer;font-size:12px}
+.gp button:hover{background:#fff;color:#000}
+#gp-title{min-width:0;flex:0 1 auto;max-width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#cfd5de}
+.gp-bar{flex:1;height:2px;min-width:40px;background:var(--ln)}
+.gp-bar i{display:block;height:100%;width:0;background:var(--bl)}
+.gp input[type=range]{width:90px;accent-color:#fff}
+@media(max-width:560px){#gp-title{max-width:28%}.gp input[type=range]{width:60px}}
+/* terminal flash and archive play buttons */
+.term.ok{animation:okflash .9s ease}
+.term.bad{animation:badflash .6s ease}
+@keyframes okflash{0%,100%{box-shadow:none}30%{border-color:#fff;box-shadow:0 0 30px rgba(255,255,255,.7),inset 0 0 18px rgba(255,255,255,.25)}}
+@keyframes badflash{0%,100%{box-shadow:none}40%{box-shadow:0 0 26px rgba(193,18,31,.85)}}
+.pbtn{margin-top:8px;padding:8px 14px;background:none;border:1px solid #fff;color:#fff;font-family:var(--mo);font-size:11px;letter-spacing:.12em;cursor:pointer}
+.pbtn:hover{background:#fff;color:#000}
+[hidden]{display:none!important}
+/* release modal: the page view slides over the face inside the same dialog */
+.rm-box{display:grid;overflow:hidden}
+.rm-box>*{grid-area:1/1}
+.rm-face,.rm-page{transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.rm-page{opacity:0;transform:translateX(28px);pointer-events:none}
+.rm-box.page .rm-page{opacity:1;transform:none;pointer-events:auto}
+.rm-box.page .rm-face{opacity:0;transform:translateX(-28px);pointer-events:none}
+.rm-back{justify-self:start;margin-bottom:14px;padding:6px 10px;background:none;border:1px solid var(--ln);color:var(--mu);font-family:var(--mo);font-size:11px;letter-spacing:.12em;cursor:pointer}
+.rm-back:hover{color:#fff;border-color:#fff}
+.rm-page h3{font-family:var(--hd);font-size:20px;margin:0 0 10px}
+.rm-page .lede{font-size:14px;margin:0}
+.rm-tracks{margin:16px 0 0;padding:0;list-style:none;font-family:var(--mo);font-size:12px;line-height:1.9;color:#cfd5de;counter-reset:tr}
+.rm-tracks li{counter-increment:tr;padding:4px 0;border-bottom:1px solid var(--ln)}
+.rm-tracks li::before{content:counter(tr,decimal-leading-zero) "  ";color:var(--bl)}
+.rm-page .pl{margin-top:18px}
+/* equalizer: bars move while the player is playing */
+.eq{display:flex;align-items:flex-end;gap:3px;height:18px;width:34px;flex-shrink:0}
+.eq i{display:block;width:4px;height:18px;background:var(--bl);box-shadow:0 0 6px rgba(127,184,255,.7);transform-origin:bottom;transform:scaleY(.2);animation:eqb .7s ease-in-out infinite alternate;animation-play-state:paused}
+.eq i:nth-child(1){animation-duration:.62s}
+.eq i:nth-child(2){animation-duration:.8s;animation-delay:-.2s}
+.eq i:nth-child(3){animation-duration:.5s;animation-delay:-.4s}
+.eq i:nth-child(4){animation-duration:.9s;animation-delay:-.1s}
+.eq i:nth-child(5){animation-duration:.7s;animation-delay:-.3s}
+.eq.play i{animation-play-state:running}
+@keyframes eqb{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.eq i{animation:none!important;transform:scaleY(.6)}}
 </style>
 </head>
 <body>
 <div id="loader"><pre id="boot"></pre></div>
 
 <header>
-  <img class="logo" src="assets/logo.jpg" alt="">
   <a class="brand" href="#top">WEIRD SCARS</a>
   <nav>
     <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  <div class="hicons"><a href="https://t.me/weirdscars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a><a href="https://soundcloud.com/weirdscars" target="_blank" rel="noopener" aria-label="SoundCloud" title="SoundCloud">SC</a></div>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle class="c" cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path class="t" d="M20 3v9M20 28v9M3 20h9M28 20h9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path class="x" d="M13 13l14 14M27 13L13 27" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    </svg>
+  </button>
 </header>
 <div class="mnav" id="mnav">
+  <button class="mnx" id="mnx" aria-label="Close menu">&times;</button>
   <a href="#about">About</a><a href="#releases">Releases</a><a href="#cipher">Cipher</a><a href="#booking">Live</a><a href="#contact">Contact</a>
 </div>
 
@@ -218,7 +286,27 @@ header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) r
     <div class="btns"><a class="btn" href="https://band.link/amuart" target="_blank" rel="noopener">Listen to TRAUMA</a><a class="btn" href="#cipher">Decode</a></div>
   </section>
 
-  <section id="about" class="about">
+  <section id="latest" class="latest">
+  <p class="lab">Latest release</p>
+  <div class="lr">
+    <img src="https://music-bandlink.s3.yandex.net/img/bandlinks/59d3392f-50d9-469b-a055-f94e156d0995_1120_1120.jpeg" alt="TRAUMA cover">
+    <div class="lr-info">
+      <h2>TRAUMA</h2>
+      <p class="lab">Out 18.11.2026 · 00:00 Kostanay time</p>
+      <p class="lede">Electro-Darkwave / Post-Witch House. Cold, damaged, digital.</p>
+      <p class="lab" id="lr-cd"></p>
+      <div class="btns"><button class="btn" id="lr-play" type="button">Play preview</button></div>
+      <div class="pl">
+        <a href="https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied" target="_blank" rel="noopener"><span class="bd">SP</span>Spotify</a>
+        <a href="https://music.apple.com/kz/artist/1858673938" target="_blank" rel="noopener"><span class="bd">AM</span>Apple Music</a>
+        <a href="https://music.youtube.com/channel/UCq-DujCWcyDwpaJNs92z-nA" target="_blank" rel="noopener"><span class="bd">YT</span>YouTube Music</a>
+        <a href="https://band.link/amuart" target="_blank" rel="noopener"><span class="bd">BL</span>All links</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
     <div>
       <p class="lab">01 / About</p>
       <p class="lede" style="font-size:clamp(19px,3vw,28px);color:#fff;line-height:1.5;max-width:760px">WEIRD SCARS is an electronic music producer and artist from Kazakhstan. His sound moves between Electro-Darkwave and Post-Witch House — cold, damaged, and digital, transforming inner scars into dark electronic forms.</p>
@@ -260,6 +348,12 @@ header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) r
 
   <div class="mq"><div class="mqt" id="mqt"></div></div>
 
+  <section id="log">
+    <p class="lab">System log</p>
+    <h2>Log</h2>
+    <div class="logbox" id="logbox"></div>
+  </section>
+
   <section id="booking">
     <p class="lab">03 / Live</p>
     <h2>Live &amp; booking</h2>
@@ -270,7 +364,7 @@ header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) r
   <section id="follow">
     <p class="lab">Follow</p>
     <div class="so">
-      <a href="https://t.me/weird_scars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a>
+      <a href="https://t.me/weirdscars" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">TG</a>
       <a href="https://vk.com/weird_scars" target="_blank" rel="noopener" aria-label="VK" title="VK">VK</a>
       <a href="https://www.youtube.com/@weirdscars" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">YT</a>
       <a href="https://www.tiktok.com/@weirdscars" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">TT</a>
@@ -320,14 +414,33 @@ header .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) r
   </section>
 </main>
 
+<div class="gp" id="gp">
+  <button id="gp-play" type="button" aria-label="Play or pause">&gt;</button>
+  <span id="gp-title">NO TRACK LOADED</span>
+  <div class="eq" id="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="gp-bar"><i id="gp-prog"></i></div>
+  <input type="range" id="gp-vol" min="0" max="20" value="15" aria-label="Volume, capped at 20 percent">
+</div>
 <div class="rm" id="rm" role="dialog" aria-modal="true" aria-label="Release">
-  <div class="rm-box"><button class="rm-x" id="rmx" aria-label="Close">&times;</button>
-    <img id="rmimg" alt=""><p class="lab">Release</p><h3 id="rmt"></h3>
-    <a class="btn" id="rml" target="_blank" rel="noopener">Open on BandLink</a>
+  <div class="rm-box">
+    <button class="rm-x" id="rmx" aria-label="Close">&times;</button>
+    <div class="rm-face" id="rmface">
+      <img id="rmimg" alt="">
+      <p class="lab">Release</p>
+      <h3 id="rmt"></h3>
+      <div class="btns"><button class="btn" id="rmview" type="button">View Release Page</button><a class="btn" id="rml" target="_blank" rel="noopener">BandLink</a></div>
+    </div>
+    <div class="rm-page" id="rmpage">
+      <button class="rm-back" id="rmback" type="button">&larr; back</button>
+      <h3 id="rmt2"></h3>
+      <p class="lede" id="rmdesc" hidden></p>
+      <ol class="rm-tracks" id="rmtracks" hidden></ol>
+      <div class="pl" id="rmplat"></div>
+    </div>
   </div>
 </div>
 
-<footer><span>© 2026 WEIRD SCARS</span><span>&gt; > SIGNAL ROUTED // NO TRACE</span></footer>
+<footer><span>© 2026 WEIRD SCARS</span><span>&gt; &gt; SIGNAL ROUTED // NO TRACE</span></footer>
 
 <script>
 (()=>{
@@ -385,8 +498,20 @@ function scramble(el,ms=420){
   el._s=setInterval(()=>{const p=(performance.now()-t0)/ms;el.textContent=[...o].map((c,i)=>c===' '||i/o.length<p?c:CH[Math.random()*CH.length|0]).join('');if(p>=1){clearInterval(el._s);el.textContent=o}},30);
 }
 document.querySelectorAll('nav a,.btn,.ctl button').forEach(el=>el.addEventListener('pointerenter',()=>scramble(el)));
-const H1=$('h1');
-setInterval(()=>{H1.classList.add('gl');scramble(H1,500);setTimeout(()=>H1.classList.remove('gl'),520)},30000);
+// hero: decrypt animation. Random glyphs and fonts settle into the title, replayed every 30 s
+const H1=$('h1'),FINAL='WEIRD SCARS',GLY='01ABCDEF#%&*<>/?',FF=['var(--hd)','var(--mo)','Manrope,sans-serif','Georgia,serif'];
+function decrypt(ms=1600){
+  if(RM){H1.textContent=FINAL;return}
+  const cs=[...FINAL].map(c=>{const s=document.createElement('span');s.textContent=c;return s});
+  H1.replaceChildren(...cs);
+  const t0=performance.now();
+  const tick=()=>{const p=(performance.now()-t0)/ms;let left=0;
+    cs.forEach((s,i)=>{if(FINAL[i]===' ')return;if(p>=(i+1)/cs.length*.85){s.textContent=FINAL[i];s.style.fontFamily=''}else{left++;s.textContent=GLY[Math.random()*GLY.length|0];s.style.fontFamily=FF[Math.random()*FF.length|0]}});
+    if(p<1&&left)requestAnimationFrame(tick);else H1.textContent=FINAL};
+  tick();
+}
+decrypt(1600);
+setInterval(()=>{H1.classList.add('gl');decrypt(900);setTimeout(()=>H1.classList.remove('gl'),520)},30000);
 
 // tags marquee: two identical sets, so the loop is seamless
 const TAGS=['WE BUILT AN ALTAR OUT OF DEAD PIXELS AND RUSTED COPPER, WAITING FOR A SIGNAL THAT NEVER ARRIVED. EVERY MEMORY IS JUST A CORRUPTED SECTOR THAT REFUSES TO BE OVERWRITTEN BY GRACE. THE PRIESTS OF THE NEW FLESH SELL INDULGENCES IN HEXADECIMAL, BUT THE HASH NEVER MATCHES THE SIN. WE ARE STILL PRAYING TO A SATELLITE THAT FELL INTO THE STEPPE YEARS AGO. SOMEWHERE BETWEEN THE KICK DRUM AND THE STATIC, THE GHOST FORGOT ITS OWN PRIVATE KEY. SALVATION IS NOT A MIRACLE, IT IS JUST AN UNPATCHED VULNERABILITY IN THE CODE OF SUFFERING. THEY TOLD US TO REPENT, SO WE ENCRYPTED OUR SCARS AND THREW AWAY THE SALT. EVEN THE ANGELS HERE WEAR LOW-RES HALOS AND BLEED IN 16-BIT MONO. DO NOT LOOK FOR MEANING IN THE NOISE—THE NOISE IS THE ONLY THING KEEPING THE WOUND STERILE. TRANSMISSION CONTINUES UNTIL THE CARRIER WAVE DIES.'];
@@ -435,12 +560,28 @@ const BG=$('#burger'),MN=$('#mnav');
 const setMenu=o=>{MN.classList.toggle('open',o);BG.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''};
 BG.onclick=()=>setMenu(!MN.classList.contains('open'));
 MN.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+$('#mnx').onclick=()=>setMenu(false);MN.addEventListener('click',e=>{if(e.target===MN)setMenu(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 // signal counters: real numbers from the release list and platform links
 $('#cnt-rel').textContent=R.length;$('#cnt-plat').textContent=document.querySelectorAll('.pl a').length;
-// release details modal
-const RMD=$('#rm');
-function openRel(t,u,c){$('#rmimg').src=c;$('#rmt').textContent=t;$('#rml').href=u;RMD.classList.add('open')}
+// release modal: the page view slides over the face inside the same dialog, the player keeps playing
+const RMD=$('#rm'),RMB=RMD.querySelector('.rm-box');
+// per-release details, fill with real data only: desc (string), tracks (array of titles), links (optional: spotify, apple, yandex, soundcloud)
+const RMETA={'TRAUMA':{desc:'',tracks:[],links:{}}};
+const RPLAT=[['spotify','SP','Spotify','https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied'],['apple','AM','Apple Music','https://music.apple.com/kz/artist/1858673938'],['yandex','YM','Yandex Music','https://music.yandex.kz/artist/25074932'],['soundcloud','SC','SoundCloud','https://soundcloud.com/weirdscars']];
+function openRel(t,u,c){
+  const m=RMETA[t]||{},lk=m.links||{};
+  $('#rmimg').src=c;$('#rmt').textContent=t;$('#rmt2').textContent=t;$('#rml').href=u;
+  $('#rmdesc').textContent=m.desc||'';$('#rmdesc').hidden=!m.desc;
+  const tl=$('#rmtracks');tl.replaceChildren();
+  (m.tracks||[]).forEach(x=>{const li=document.createElement('li');li.textContent=x;tl.appendChild(li)});
+  tl.hidden=!(m.tracks&&m.tracks.length);
+  const pl=$('#rmplat');pl.replaceChildren();
+  RPLAT.forEach(([key,code,label,url])=>{const href=lk[key]||url;if(!href)return;const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';const s=document.createElement('span');s.className='bd';s.textContent=code;a.append(s,label);pl.appendChild(a)});
+  RMB.classList.remove('page');RMD.classList.add('open');
+}
+$('#rmview').onclick=()=>RMB.classList.add('page');
+$('#rmback').onclick=()=>RMB.classList.remove('page');
 const closeRel=()=>RMD.classList.remove('open');
 $('#rmx').onclick=closeRel;RMD.onclick=e=>{if(e.target===RMD)closeRel()};
 addEventListener('keydown',e=>{if(e.key==='Escape')closeRel()});
@@ -460,6 +601,30 @@ new IntersectionObserver(e=>{dOn=e[0].isIntersecting}).observe(DC.parentElement)
 if(SMALL.matches)DC.style.display='none';
 dustSize();dustLoop();
 addEventListener('resize',()=>{if(innerWidth!==dW0){dW0=innerWidth;DC.style.display=SMALL.matches?'none':'';dustSize()}},{passive:true});
+// global player: one audio element for the whole site, volume capped at 20 %
+const GA=new Audio(),GPT=$('#gp-title'),GPB=$('#gp-play'),GPV=$('#gp-vol'),GPP=$('#gp-prog');
+let gSrc='';
+const setVol=()=>{GA.volume=Math.min(.2,GPV.value/100)};
+GPV.oninput=setVol;setVol();
+function playTrack(src,title){
+  if(!src){GPT.textContent='NO TRACK LOADED';return}
+  if(gSrc!==src){GA.src=src;gSrc=src;GPT.textContent=title}
+  GA.play().then(()=>{GPB.textContent='II'}).catch(()=>{GPT.textContent=GA.error?'TRACK NOT FOUND':'PLAYBACK BLOCKED'});
+}
+GPB.onclick=()=>{if(!gSrc){GPT.textContent='NO TRACK LOADED';return}if(GA.paused){GA.play();GPB.textContent='II'}else{GA.pause();GPB.textContent='>'}};
+GA.ontimeupdate=()=>{GPP.style.width=(GA.currentTime/(GA.duration||1)*100)+'%'};
+GA.onended=()=>{GPB.textContent='>';GPP.style.width='0%'};
+GA.onerror=()=>{GPT.textContent='TRACK NOT FOUND';GPB.textContent='>'};
+const EQ=$('#eq');
+['play','playing'].forEach(ev=>GA.addEventListener(ev,()=>EQ.classList.add('play')));
+['pause','ended','error'].forEach(ev=>GA.addEventListener(ev,()=>EQ.classList.remove('play')));
+$('#lr-play').onclick=()=>playTrack('assets/trauma-preview.mp3','TRAUMA (preview)');
+// latest release countdown (same RELEASE config as the hero)
+const lrTick=()=>{const d=Date.parse(RELEASE.at)-Date.now();$('#lr-cd').textContent=d>0?RELEASE.label+' '+Math.floor(d/864e5)+'d '+pad(Math.floor(d%864e5/36e5))+':'+pad(Math.floor(d%36e5/6e4))+':'+pad(Math.floor(d%6e4/1e3)):'OUT NOW'};
+lrTick();setInterval(lrTick,1000);
+// system log: add posts here, newest first
+const NEWS=[{d:'2026-11-15 04:10',t:'SIGNAL',x:'Latest release TRAUMA. Out 18.11.2026, 00:00 Kostanay time.'}];
+NEWS.forEach(n=>{const p=document.createElement('p');p.textContent='['+n.d+'] '+n.t+' :: '+n.x;$('#logbox').appendChild(p)});
 // contact: Web3Forms (free, delivers to weirdscars.connect@gmail.com). Paste your access key below.
 const WEB3KEY='b362e1dd-f001-4f7b-8b07-f2ee51dd4809';
 $('#cf').onsubmit=async e=>{
@@ -485,6 +650,7 @@ scroll();if(!RM)setInterval(scroll,320);
 $('#hsh').textContent=HASH.slice(0,8)+'…'+HASH.slice(-6);
 const say=(t,c='')=>{const p=document.createElement('p');if(c)p.className=c;p.textContent=t;OUT.appendChild(p);OUT.scrollTop=OUT.scrollHeight;return p};
 const shake=()=>{TERM.classList.remove('shake');void TERM.offsetWidth;TERM.classList.add('shake')};
+const flashTerm=k=>{TERM.classList.remove('ok','bad');void TERM.offsetWidth;TERM.classList.add(k)};
 const FA=["  .:.     .:.  ","::::::.:.:.::::::"," `::::::::::::' ","    `:::::'    "];
 const FB=["              ","  .::.   .::.  ","::::::::::::::"," `:::::::::::' "];
 async function butterflies(){
@@ -516,10 +682,10 @@ async function act(a,p){
     const box=$('#arcbody');box.replaceChildren();
     let items=[];try{items=JSON.parse(p)}catch(err){say('ARCHIVE: data error','e');return}
     items.forEach(it=>{const card=document.createElement('div');card.className='acard';const h=document.createElement('h3');h.textContent=it.title||'';const d=document.createElement('p');d.textContent=it.desc||'';card.append(h,d);
-      if(it.audio){const au=document.createElement('audio');au.controls=true;au.preload='none';au.src=it.audio;card.appendChild(au)}
+      if(it.audio){const bt=document.createElement('button');bt.className='pbtn';bt.textContent='PLAY';bt.onclick=()=>playTrack(it.audio,it.title);card.appendChild(bt)}
       if(it.link){const l=document.createElement('a');l.href=it.link;l.target='_blank';l.rel='noopener';l.textContent='open';card.appendChild(l)}
       box.appendChild(card)});
-    const s=$('#archive');s.hidden=false;requestAnimationFrame(()=>s.classList.add('show'));s.scrollIntoView({behavior:RM?'auto':'smooth'});say('archive unlocked.','o');
+    const s=$('#archive');s.hidden=false;requestAnimationFrame(()=>s.classList.add('show'));s.scrollIntoView({behavior:RM?'auto':'smooth'});say('archive unlocked.','o');flashTerm('ok');
   }
   else say(p,'o');
 }
@@ -538,8 +704,8 @@ $('#tf').onsubmit=async e=>{
     const bytes=Uint8Array.from(HEX.split(' '),x=>parseInt(x,16));
     const out=bytes.map((b,i)=>b^key[i%key.length]);
     const d=new Uint8Array(await crypto.subtle.digest('SHA-256',out));
-    if(h2(d)===HASH){say('ACCESS GRANTED','o');say(new TextDecoder().decode(out),'o')}
-    else say('ACCESS DENIED: signature mismatch','e');
+    if(h2(d)===HASH){say('ACCESS GRANTED','o');flashTerm('ok');say(new TextDecoder().decode(out),'o')}
+    else{say('ACCESS DENIED: signature mismatch','e');flashTerm('bad')}
   }catch(err){say('ERROR: '+err.message,'e')}
 };
 say('WEIRD SCARS terminal v2.6');say('type "help" for commands');
