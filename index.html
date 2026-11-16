@@ -274,7 +274,6 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 @media(min-width:1000px){.arcbody{grid-template-columns:repeat(3,1fr)}}
 .acard{margin-top:0}
 .acard img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--ln);filter:grayscale(.2) contrast(1.05);margin-bottom:12px}
-@media(max-width:767px){#bgv{display:none}}
 /* release modal: the box never leaves the screen; long press text scrolls inside it */
 .rm-box{max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
 </style>
@@ -299,7 +298,7 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 
 <main id="top">
   <section class="hero">
-    <video id="bgv" autoplay muted loop playsinline preload="metadata" src="assets/bg.mp4"></video>
+    <video id="bgv" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg" src="assets/bg.mp4"></video>
     <canvas id="dustc" aria-hidden="true"></canvas>
     <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
