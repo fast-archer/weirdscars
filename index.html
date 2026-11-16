@@ -552,7 +552,7 @@ $('#nl').onsubmit=async e=>{
 const SMALL=matchMedia('(max-width: 767px)');
 document.documentElement.classList.add('js');
 const L=$('#loader'),bp=$('#boot');
-const BOOT=['> WEIRD_SCARS_OS v2.6','> BOOTING...','> MOUNTING /dev/steppe ... OK','> DECRYPTING ARCHIVE_KEYS ... OK','> CONNECTING TO KOSTANAY NODE ... OK','> [WARNING] SIGNAL IS CORRUPTED','> ESTABLISHING SECURE TUNNEL...'];
+const BOOT=['> WEIRD_SCARS_OS v2.6','> BOOTING...','> MOUNTING /dev/steppe ... OK','> DECRYPTING ARCHIVE_KEYS ... OK','> TRACING CARRIER_SIGNAL ... OK','> [WARNING] SIGNAL IS CORRUPTED','> ESTABLISHING SECURE TUNNEL...'];
 const curEl=document.createElement('span');curEl.className='bcur';curEl.textContent='_';
 const paint=lines=>{bp.textContent=lines.join('\n')+'\n';bp.appendChild(curEl)};
 let skipped=false;
