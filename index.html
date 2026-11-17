@@ -300,7 +300,7 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 .chat.open .chat-panel{transform:translateY(0)}
 .chat-panel{width:min(880px,100%);height:min(580px,88dvh);display:grid;grid-template-columns:230px 1fr;overflow:hidden}
 .chat-side{padding:18px;border-right:1px solid rgba(255,255,255,.1);overflow-y:auto}
-\1color:#cfd5de;font-family:var(--mo);font-size:12px;letter-spacing:.08em;text-align:left;cursor:pointer}
+.chat-thread{display:block;width:100%;margin:6px 0;padding:10px 12px;background:none;border:1px solid transparent;border-radius:0;color:#cfd5de;font-family:var(--mo);font-size:12px;letter-spacing:.08em;text-align:left;cursor:pointer}
 .chat-thread:hover,.chat-thread.on{border-color:rgba(255,255,255,.2);color:#fff;background:rgba(255,255,255,.05)}
 .chat-main{display:grid;grid-template-rows:auto 1fr;min-width:0}
 .chat-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1);font-family:var(--mo);font-size:12px;letter-spacing:.12em}
@@ -310,6 +310,15 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 .bubble.left{align-self:flex-start}
 .bubble.right{align-self:flex-end;border-left:0;border-right:2px solid #fff;text-align:right;color:#fff}
 @media(max-width:640px){.chat-panel{grid-template-columns:1fr;grid-template-rows:auto 1fr}.chat-side{overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid rgba(255,255,255,.1);padding:10px 14px}#chat-threads{display:flex;gap:6px}.chat-thread{display:inline-block;width:auto;margin:0;white-space:nowrap}}
+.rm-wrap{position:relative;width:100%;max-width:420px}
+.rm-box{max-height:85vh;overflow-y:auto}
+.rm-x{position:absolute;top:6px;right:6px;z-index:2}
+.rm-box::-webkit-scrollbar,.chat-msgs::-webkit-scrollbar,.out::-webkit-scrollbar{width:4px}
+.rm-box::-webkit-scrollbar-thumb,.chat-msgs::-webkit-scrollbar-thumb,.out::-webkit-scrollbar-thumb{background:#fff;border-radius:0}
+.rm-box,.chat-msgs,.out{scrollbar-width:thin;scrollbar-color:#fff transparent}
+.out pre{white-space:pre;word-break:normal;line-height:1.1}
+@media(max-width:640px){.out pre{font-size:9px}}
+@media(max-width:640px){.gp-vol{width:60px}}
 </style>
 </head>
 <body>
@@ -486,24 +495,25 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
   <button id="gp-list-btn" type="button" aria-label="Playlist" aria-expanded="false">&equiv;</button>
 </div>
 <div class="rm" id="rm" role="dialog" aria-modal="true" aria-label="Release">
-  <div class="rm-box">
+  <div class="rm-wrap">
     <button class="rm-x" id="rmx" aria-label="Close">&times;</button>
-    <div class="rm-face" id="rmface">
-      <img id="rmimg" alt="">
-      <p class="lab">Release</p>
-      <h3 id="rmt"></h3>
-      <div class="btns"><button class="btn" id="rmview" type="button">View Release Page</button><a class="btn" id="rml" target="_blank" rel="noopener">BandLink</a></div>
-    </div>
-    <div class="rm-page" id="rmpage">
-      <button class="rm-back" id="rmback" type="button">&larr; back</button>
-      <h3 id="rmt2"></h3>
-      <p class="lede" id="rmdesc" hidden></p>
-      <ol class="rm-tracks" id="rmtracks" hidden></ol>
-      <div class="pl" id="rmplat"></div>
+    <div class="rm-box">
+      <div class="rm-face" id="rmface">
+        <img id="rmimg" alt="">
+        <p class="lab">Release</p>
+        <h3 id="rmt"></h3>
+        <div class="btns"><button class="btn" id="rmview" type="button">View Release Page</button><a class="btn" id="rml" target="_blank" rel="noopener">BandLink</a></div>
+      </div>
+      <div class="rm-page" id="rmpage">
+        <button class="rm-back" id="rmback" type="button">&larr; back</button>
+        <h3 id="rmt2"></h3>
+        <p class="lede" id="rmdesc" hidden></p>
+        <ol class="rm-tracks" id="rmtracks" hidden></ol>
+        <div class="pl" id="rmplat"></div>
+      </div>
     </div>
   </div>
 </div>
-
 <footer><span>© 2026 WEIRD SCARS</span><span>&gt; &gt; SIGNAL ROUTED // NO TRACE</span></footer>
 
 <script>
@@ -511,7 +521,7 @@ header .burger.gl svg{animation:bgl .4s steps(2) 1}
 const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const pad=v=>String(v).padStart(2,'0'),wait=ms=>new Promise(r=>setTimeout(r,ms));
 // DATA DROPS: edit these threads. Each message: text, side ("left" or "right")
-const CHAT_LOGS=[{thread:"SIGNAL",messages:[{text:"System initialized. Awaiting new data packets.",side:"left"},{text:"Frequencies aligned. The signal is clear.",side:"right"}]}];
+const CHAT_LOGS=[{thread:"SIGNAL",messages:[{text:"sys is running clean. too clean tbh. can't shake the feeling someone's sniffing the line. re-check the nodes & lock down the crypto rn. way too much at stake to leave a trace",side:"left"},{text:"yeah, i saw a weird latency spike 2 mins ago. could be a passive sniffer. killed the old socket & rotated the xor keys rn. burn this thread after reading, moving to backup relay.",side:"right"}]}];
 var bassV=0;
 if(RM)$('#bgv').pause();
 
@@ -564,7 +574,7 @@ function scramble(el,ms=420){
   const t0=performance.now();clearInterval(el._s);
   el._s=setInterval(()=>{const p=(performance.now()-t0)/ms;el.textContent=[...o].map((c,i)=>c===' '||i/o.length<p?c:CH[Math.random()*CH.length|0]).join('');if(p>=1){clearInterval(el._s);el.textContent=o}},30);
 }
-document.querySelectorAll('nav a,.btn,.ctl button,.hicons a,.so a,.gp button,.pbtn,.rm-back,.rm-x,.mnx,.nl button').forEach(el=>el.addEventListener('pointerenter',()=>scramble(el)));
+document.querySelectorAll('nav a,.btn,.ctl button,.hicons a,.so a,.pbtn,.rm-back,.rm-x,.mnx,.nl button,.hbtn').forEach(el=>el.addEventListener('pointerenter',()=>scramble(el)));
 setInterval(()=>{const b=$('#burger');b.classList.add('gl');setTimeout(()=>b.classList.remove('gl'),420)},6000);
 // hero: decrypt animation. Random glyphs and fonts settle into the title, replayed every 30 s
 const H1=$('h1'),FINAL='WEIRD SCARS',GLY='01ABCDEF#%&*<>/?',FF=['var(--hd)','var(--mo)','Manrope,sans-serif','Georgia,serif'];
