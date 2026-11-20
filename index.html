@@ -406,6 +406,11 @@ body.modal-open{overflow:hidden}
 #lr-cd.glitch{animation:nowGl .32s steps(2,end) 1}
 @keyframes nowGl{0%{transform:translateX(-2px);text-shadow:2px 0 #fff,-2px 0 rgba(255,255,255,.35)}50%{transform:translateX(3px);text-shadow:-3px 0 #fff}100%{transform:none;text-shadow:none}}
 @media (prefers-reduced-motion:reduce){.insp.reveal,#lr-cd.glitch{animation:none}.lr>img{transition:none}}
+.slides{display:none;position:absolute;inset:0;z-index:-3;pointer-events:none;overflow:hidden}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity 1.4s ease,transform 7s linear;filter:grayscale(.2)}
+.slides img.on{opacity:.3;transform:scale(1.12)}
+@media (max-width:767px){#bgv{display:none}.slides{display:block}}
+@media (prefers-reduced-motion:reduce){.slides img{transition:none;transform:none}}
 </style>
 </head>
 <body>
@@ -430,6 +435,7 @@ body.modal-open{overflow:hidden}
 <main id="top">
   <section class="hero">
     <video id="bgv" muted loop playsinline preload="none" poster="assets/bg-poster.jpg" data-src="assets/bg.mp4"></video>
+  <div class="slides" id="slides" aria-hidden="true"></div>
     <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
     <p class="lab">Electronic music producer · artist</p>
@@ -678,6 +684,8 @@ tick();setInterval(tick,1000);
 // ==========================================================================
 // >>> CONFIG START
 const CONFIG={
+  // HERO SLIDESHOW (phones only): frames shown one after another. Add or remove lines here; files go in assets/mobile/.
+  hero: {frames: ["assets/mobile/frame-01.webp", "assets/mobile/frame-02.webp", "assets/mobile/frame-03.webp", "assets/mobile/frame-04.webp", "assets/mobile/frame-05.webp", "assets/mobile/frame-06.webp", "assets/mobile/frame-07.webp", "assets/mobile/frame-08.webp"]},
   platforms: [
   ["spotify", "SP", "Spotify", "https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied"],
   ["apple", "AM", "Apple Music", "https://music.apple.com/kz/artist/1858673938"],
@@ -964,6 +972,23 @@ addEventListener('keydown',e=>{
   if(MN.classList.contains('open')){setMenu(false);return}
   if(!INSP.hidden)mapDeselect();
 });
+// MOBILE SLIDESHOW: the hero background on phones. Frames come from CONFIG.hero.frames.
+// A frame is downloaded only when it is about to be shown. Rotation pauses while the tab is hidden.
+// Reduced motion: the first frame stays on screen, no rotation. Desktop never loads these frames.
+(()=>{
+  if(!matchMedia('(max-width:767px)').matches)return;
+  const box=$('#slides'),frames=(CONFIG.hero&&CONFIG.hero.frames)||[];
+  if(!box||!frames.length)return;
+  const imgs=frames.map(()=>{const im=document.createElement('img');im.alt='';box.appendChild(im);return im});
+  let cur=-1,timer=null;
+  const show=k=>{if(!imgs[k].getAttribute('src'))imgs[k].src=frames[k];imgs.forEach(im=>im.classList.remove('on'));imgs[k].classList.add('on');cur=k};
+  show(0);
+  if(RM)return;
+  const start=()=>{if(!timer)timer=setInterval(()=>show((cur+1)%frames.length),5000)};
+  const stop=()=>{clearInterval(timer);timer=null};
+  start();
+  document.addEventListener('visibilitychange',()=>{document.hidden?stop():start()});
+})();
 function openRel(t,u,l,r){
   const m=RMETA[t]||{},lk=m.links||{};
   $('#rmimg').src=l;imgFb($('#rmimg'),r);$('#rmt').textContent=t;$('#rmt2').textContent=t;$('#rml').href=u;
