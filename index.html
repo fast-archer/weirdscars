@@ -12,7 +12,11 @@
 <!-- CSP NOTE: 'unsafe-inline' is allowed for scripts and styles because this site is a single HTML file
      with inline code. It is a known weakness: in a future refactor move the JS and CSS into separate files
      and remove 'unsafe-inline'. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://music-bandlink.s3.yandex.net https://i.ytimg.com; media-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com https://buttondown.com https://static.cloudflareinsights.com; form-action 'self' https://buttondown.com; base-uri 'self'; object-src 'none'">
+<!-- CSP NOTE: if the console still reports a script blocked by "script-src 'self' 'unsafe-inline'" for a domain listed here,
+     Cloudflare is sending its own Content-Security-Policy header (Transform Rule "Security headers"). The browser applies BOTH
+     policies and the stricter one wins, so this tag cannot relax it. Fix the header in Cloudflare (Rules > Transform Rules >
+     Modify Response Header) so it carries the same directives as this tag, or turn off Web Analytics auto-injection. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-elem 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://music-bandlink.s3.yandex.net https://i.ytimg.com; media-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com https://buttondown.com https://static.cloudflareinsights.com; form-action 'self' https://buttondown.com; base-uri 'self'; object-src 'none'">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WEIRD SCARS">
 <meta property="og:title" content="WEIRD SCARS — TRAUMA">
@@ -425,7 +429,7 @@ body.modal-open{overflow:hidden}
 
 <main id="top">
   <section class="hero">
-    <video id="bgv" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg" src="assets/bg.mp4"></video>
+    <video id="bgv" muted loop playsinline preload="none" poster="assets/bg-poster.jpg" data-src="assets/bg.mp4"></video>
     <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
     <div class="meta mr" id="cd">TRAUMA IN</div>
     <p class="lab">Electronic music producer · artist</p>
@@ -530,7 +534,7 @@ body.modal-open{overflow:hidden}
     </div>
     <h2 style="margin-top:44px">Newsletter</h2>
     <p class="lede">New releases and live dates. Nothing else.</p>
-    <form class="nl" id="nl" action="https://buttondown.com/api/emails/embed-subscribe/weirdscars" method="post" target="_blank" rel="noopener"><input type="email" name="email" placeholder="your@email" required aria-label="email"><button type="submit">Subscribe</button></form>
+    <form class="nl" id="nl" action="https://buttondown.com/api/emails/embed-subscribe/weirdscars" method="post" target="_blank" rel="noopener"><input type="email" name="email" autocomplete="email" placeholder="your@email" required aria-label="email"><button type="submit">Subscribe</button></form>
   </section>
 
   <section id="cipher">
@@ -562,9 +566,9 @@ body.modal-open{overflow:hidden}
     <h2>Direct link</h2>
     <form id="cf">
       <input type="checkbox" name="botcheck" style="display:none">
-      <label>Alias / Name<input name="name" required></label>
-      <label>Contact (email / Telegram)<input name="contact" required></label>
-      <label>Message<textarea name="message" rows="4"></textarea></label>
+      <label>Alias / Name<input name="name" autocomplete="name" required></label>
+      <label>Contact (email / Telegram)<input name="contact" autocomplete="off" required></label>
+      <label>Message<textarea name="message" autocomplete="off" rows="4"></textarea></label>
       <button class="btn" type="submit" style="justify-self:start">Send signal</button>
       <div id="cs"></div>
     </form>
@@ -630,7 +634,17 @@ document.querySelectorAll('img[data-fb]').forEach(im=>imgFb(im,im.dataset.fb));
 // DATA DROPS: edit these threads. Each message: text, side ("left" or "right")
 const CHAT_LOGS=[{thread:"SIGNAL",messages:[{text:"sys is running clean. too clean tbh. can't shake the feeling someone's sniffing the line. re-check the nodes & lock down the crypto rn. way too much at stake to leave a trace",side:"left"},{text:"yeah, i saw a weird latency spike 2 mins ago. could be a passive sniffer. killed the old socket & rotated the xor keys rn. burn this thread after reading, moving to backup relay.",side:"right"}]}];
 var bassV=0;
-if(RM)$('#bgv').pause();
+// HERO VIDEO: loaded only on desktop, only when motion is allowed and data saver is off.
+// Phones and reduced-motion visitors see the poster image only. The video is paused while the tab is hidden.
+(()=>{
+  const v=$('#bgv');if(!v)return;
+  const saver=!!(navigator.connection&&navigator.connection.saveData);
+  if(RM||saver||!matchMedia('(min-width:768px)').matches)return;
+  v.src=v.dataset.src;
+  const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
+  go();
+  document.addEventListener('visibilitychange',()=>{document.hidden?v.pause():go()});
+})();
 
 // countdown to 18.11.2026 00:00 Kazakhstan (UTC+5). Absolute instant, so it is right in any timezone.
 const RELEASE={label:'TRAUMA IN',at:'2026-11-18T00:00:00+05:00'}; // next release: change label and date (+05 = Kostanay)
@@ -976,6 +990,7 @@ TERMEL.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||RM||SMALL.
 TERMEL.addEventListener('pointerleave',()=>{TERMEL.style.transform=''});
 // global player: one audio element for the whole site. PL is filled by build.py from assets/tracks
 const GA=new Audio(),GPT=$('#gp-title'),GPB=$('#gp-play'),GPP=$('#gp-prog'),GBAR=$('#gp-bar'),GLIST=$('#gplist'),EQ=$('#eq');
+GA.preload='none'; // nothing is downloaded until play is pressed (the first track was fetched on every page load)
 let gSrc='',ti=-1,seeking=false;
 const markList=()=>GLIST.querySelectorAll('.gp-item').forEach((b,i)=>b.classList.toggle('on',i===ti));
 function startTrack(src,title,play){
@@ -1164,7 +1179,7 @@ document.addEventListener('pointerdown',e=>{if(INSP.hidden)return;if(e.target.cl
 
 MAP_NODES.forEach(n=>{
   const b=document.createElement('button');b.type='button';
-  b.className='nd'+(n.id==='ws'?' core':'')+(n.alarm?' alarm':'');
+  b.className='nd'+(n.id==='ws'?' core':'')+(n.alarm?' alarm':'');b.setAttribute('aria-label',n.label);
   const p=MAP_POS[n.id];b.style.left=(p.x/10)+'%';b.style.top=(p.y/6.4)+'%';
   const t1=document.createElement('span');t1.className='nt';t1.textContent=n.tag;
   const l1=document.createElement('span');l1.className='nl';l1.textContent=n.label;
