@@ -170,7 +170,7 @@ form.sending button{animation:pulse 1s ease-in-out infinite;pointer-events:none;
 .bcur{display:inline-block;color:#fff;text-shadow:0 0 6px #fff,0 0 14px rgba(255,255,255,.6);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
 #loader.glitch pre{animation:bglitch .42s steps(2) 1}
-@keyframes bglitch{0%{transform:none}25%{transform:translate(-5px,1px);text-shadow:3px 0 rgba(255,255,255,.8),-3px 0 #fff}50%{transform:translate(6px,-1px);clip-path:inset(30% 0 40% 0)}75%{transform:translate(-2px,0);clip-path:none}100%{transform:none;text-shadow:none}}
+
 /* scroll reveal */
 .js .rv{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
@@ -211,7 +211,7 @@ header .burger svg{width:26px;height:26px}
 /* system log */
 /* global player: fixed bottom bar, volume 0-100 % */
 body{padding-bottom:60px}
-@media (max-width:767px){body.term-typing .gp,body.term-typing .gplist{display:none}}
+@media (max-width:767px){body.term-typing .gp,body.term-typing .gplist,body.kb-open .gp,body.kb-open .gplist{display:none}}
 .gp{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.94);border-top:1px solid var(--ln);font-family:var(--mo);font-size:11px;letter-spacing:.12em}
 .gp button{width:34px;height:34px;flex-shrink:0;background:none;border:1px solid #fff;color:#fff;cursor:pointer;font-size:12px}
 .gp button:hover{background:#fff;color:#000}
@@ -257,7 +257,8 @@ header .burger{padding:0;align-items:center;justify-content:center;color:#fff}
 header .burger svg{width:26px;height:26px;overflow:visible}
 header .burger svg g{transform-origin:20px 20px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 header .burger[aria-expanded="true"] svg g{transform:rotate(45deg)}
-header .burger.gl svg{animation:bgl .4s steps(2) 1}
+header .burger.shine{animation:shine 1.6s cubic-bezier(.3,.7,.2,1) 1}
+@keyframes shine{0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)}30%{box-shadow:0 0 24px rgba(255,255,255,.85),inset 0 0 12px rgba(255,255,255,.35)}60%{box-shadow:0 0 12px rgba(255,255,255,.4)}}
 @keyframes bgl{25%{transform:translate(-2px,0);filter:drop-shadow(2px 0 #fff)}50%{transform:translate(2px,1px)}75%{transform:none;filter:none}}
 /* hover glitch on links and cards */
 .pl a:hover,.so a:hover,.hicons a:hover,.rc:hover,.acard:hover,.fc:hover{animation:hovg .4s steps(2) 1}
@@ -420,6 +421,13 @@ body.modal-open{overflow:hidden}
 .totop.on{opacity:1;visibility:visible;transform:none}
 .totop:hover,.totop:focus-visible{background:#fff;color:#000;outline:none}
 @media (prefers-reduced-motion:reduce){.totop{transition:none}}
+.scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);opacity:0;pointer-events:none;z-index:1;animation:heroScan 20s linear infinite}
+@keyframes heroScan{0%{top:0;opacity:0}1%{opacity:.5}7%{top:100%;opacity:.5}8%,100%{top:100%;opacity:0}}
+.rc,.acard{position:relative}
+.rc::before,.rc::after,.acard::before,.acard::after{content:"";position:absolute;width:14px;height:14px;border-color:rgba(255,255,255,.4);border-style:solid;border-width:0;pointer-events:none}
+.rc::before,.acard::before{top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+.rc::after,.acard::after{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+@media (prefers-reduced-motion:reduce){.scan{animation:none;display:none}}
 </style>
 </head>
 <body>
@@ -443,6 +451,7 @@ body.modal-open{overflow:hidden}
 
 <main id="top">
   <section class="hero">
+    <div class="scan" aria-hidden="true"></div>
     <video id="bgv" muted loop playsinline preload="none" poster="assets/bg-poster.jpg" data-src="assets/bg.mp4"></video>
   <div class="slides" id="slides" aria-hidden="true"></div>
     <div class="meta ml">> SYS.ONLINE<br>_GATEWAY ACTIVE</div>
@@ -549,7 +558,7 @@ body.modal-open{overflow:hidden}
     </div>
     <h2 style="margin-top:44px">Newsletter</h2>
     <p class="lede">New releases and live dates. Nothing else.</p>
-    <form class="nl" id="nl" action="https://buttondown.com/api/emails/embed-subscribe/weirdscars" method="post" target="_blank" rel="noopener"><input type="email" name="email" autocomplete="email" placeholder="your@email" required aria-label="email"><button type="submit">Subscribe</button></form>
+    <form class="nl" id="nl" action="https://buttondown.com/api/emails/embed-subscribe/weirdscars" method="post" target="_blank" rel="noopener"><input type="email" name="email" autocomplete="email" data-form-type="other" data-lpignore="true" placeholder="your@email" required aria-label="email"><button type="submit">Subscribe</button></form>
   </section>
 
   <section id="cipher">
@@ -566,7 +575,7 @@ body.modal-open{overflow:hidden}
     </div>
     <div class="term" id="term">
       <div class="out" id="out" aria-live="polite"></div>
-      <form id="tf" autocomplete="off"><span>&gt;</span><input id="ti" name="cmd" maxlength="120" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" data-lpignore="true" data-form-type="other" aria-label="terminal input" placeholder="type 'help'"></form>
+      <form id="tf" autocomplete="off"><span>&gt;</span><input id="ti" data-form-type="other" name="cmd" maxlength="120" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" data-lpignore="true" data-form-type="other" aria-label="terminal input" placeholder="type 'help'"></form>
     </div>
   </section>
 
@@ -581,9 +590,9 @@ body.modal-open{overflow:hidden}
     <h2>Direct link</h2>
     <form id="cf">
       <input type="checkbox" name="botcheck" style="display:none">
-      <label>Alias / Name<input name="name" autocomplete="name" required></label>
-      <label>Contact (email / Telegram)<input name="contact" autocomplete="off" required></label>
-      <label>Message<textarea name="message" autocomplete="off" rows="4"></textarea></label>
+      <label>Alias / Name<input name="name" autocomplete="name" data-form-type="other" data-lpignore="true" required></label>
+      <label>Contact (email / Telegram)<input name="contact" autocomplete="off" data-form-type="other" data-lpignore="true" required></label>
+      <label>Message<textarea name="message" autocomplete="off" data-form-type="other" data-lpignore="true" rows="4"></textarea></label>
       <button class="btn" type="submit" style="justify-self:start">Send signal</button>
       <div id="cs"></div>
     </form>
@@ -594,6 +603,7 @@ body.modal-open{overflow:hidden}
     <p class="lede">Encrypted notes and signal logs. Open the channel to read the threads.</p>
     <div class="btns"><button class="btn" id="dd-open" type="button">Open channel</button></div>
   </section>
+<div id="top-sentinel" aria-hidden="true" style="position:absolute;top:900px;left:0;width:1px;height:1px;pointer-events:none;"></div>
 </main>
 
 <div class="ddfx" id="ddfx" aria-hidden="true"><div class="hs" id="hs"></div></div>
@@ -695,7 +705,7 @@ tick();setInterval(tick,1000);
 // >>> CONFIG START
 const CONFIG={
   // HERO SLIDESHOW (phones only): frames shown one after another. Add or remove lines here; files go in assets/mobile/.
-  hero: {frames: ["assets/mobile/frame-01.webp", "assets/mobile/frame-02.webp", "assets/mobile/frame-03.webp", "assets/mobile/frame-04.webp", "assets/mobile/frame-05.webp", "assets/mobile/frame-06.webp", "assets/mobile/frame-07.webp", "assets/mobile/frame-08.webp","assets/mobile/frame-09.webp"]},
+  hero: {posterDesktop: "assets/bg-poster.jpg", frames: ["assets/mobile/frame-01.webp", "assets/mobile/frame-02.webp", "assets/mobile/frame-03.webp", "assets/mobile/frame-04.webp", "assets/mobile/frame-05.webp", "assets/mobile/frame-06.webp", "assets/mobile/frame-07.webp", "assets/mobile/frame-08.webp","assets/mobile/frame-09.webp"]},
   platforms: [
   ["spotify", "SP", "Spotify", "https://open.spotify.com/artist/3WEdQL1RspwjtFcIFVdied"],
   ["apple", "AM", "Apple Music", "https://music.apple.com/kz/artist/1858673938"],
@@ -855,7 +865,7 @@ function scramble(el,ms=420){
   el._s=setInterval(()=>{const p=(performance.now()-t0)/ms;el.textContent=[...o].map((c,i)=>c===' '||i/o.length<p?c:CH[Math.random()*CH.length|0]).join('');if(p>=1){clearInterval(el._s);el.textContent=o}},30);
 }
 document.querySelectorAll('nav a,.btn,.ctl button,.hicons a,.so a,.pbtn,.rm-back,.rm-x,.mnx,.nl button,.hbtn').forEach(el=>el.addEventListener('pointerenter',()=>scramble(el)));
-setInterval(()=>{const b=$('#burger');b.classList.add('gl');setTimeout(()=>b.classList.remove('gl'),420)},6000);
+setInterval(()=>{if(RM)return;const b=$('#burger');if(!b)return;b.classList.add('shine');setTimeout(()=>b.classList.remove('shine'),1600)},90000);
 // hero: decrypt animation. Random glyphs and fonts settle into the title, replayed every 30 s
 const H1=$('h1'),FINAL='WEIRD SCARS',GLY='01ABCDEF#%&*<>/?',FF=['var(--hd)','var(--mo)','Manrope,sans-serif','Georgia,serif'];
 function decrypt(ms=1600){
@@ -999,10 +1009,16 @@ addEventListener('keydown',e=>{
   start();
   document.addEventListener('visibilitychange',()=>{document.hidden?stop():start()});
 })();
-// BACK TO TOP: shows only after a long scroll AND a pause (hidden while the page is moving)
+// DESKTOP POSTER: the hero video's poster comes from CONFIG.hero.posterDesktop (set after CONFIG exists)
+(()=>{const v=$('#bgv');if(v&&CONFIG.hero&&CONFIG.hero.posterDesktop)v.poster=CONFIG.hero.posterDesktop})();
+// BACK TO TOP: an IntersectionObserver on the sentinel says "far enough" (works regardless of scroll events).
+// The button appears only after the page has stopped moving, and hides while it moves.
 (()=>{
-  const b=$('#totop');if(!b)return;let idle=null;
-  const reveal=()=>b.classList.toggle('on',scrollY>900);
+  const b=$('#totop'),sent=$('#top-sentinel');
+  if(!b||!sent)return;
+  let far=false,idle=null;
+  new IntersectionObserver(es=>{far=!es[0].isIntersecting&&es[0].boundingClientRect.top<0},{threshold:0}).observe(sent);
+  const reveal=()=>b.classList.toggle('on',far);
   addEventListener('scroll',()=>{b.classList.remove('on');clearTimeout(idle);idle=setTimeout(reveal,650)},{passive:true});
   b.addEventListener('click',()=>scrollTo({top:0,behavior:RM?'auto':'smooth'}));
 })();
@@ -1384,8 +1400,14 @@ function whoamiLine(){
   return `[USER: ${user}] // [ACCESS: ${pick(['GUEST','OBSERVER','VISITOR'])}] // [LOCATION: ${pick(['UNKNOWN','MASKED','ROUTED'])}] // [TRACE: MASKED]`;
 }
 // on phones the music bar and its playlist step aside while the keyboard is open (the keyboard needs the room)
-TI.addEventListener('focus',()=>document.body.classList.add('term-typing'));
-TI.addEventListener('blur',()=>document.body.classList.remove('term-typing'));
+// PHONE KEYBOARD: while the on-screen keyboard is open the music bar steps aside, and returns when it closes.
+// Keyboard state comes from the visual viewport, so it also works when the input keeps focus after Back is pressed.
+(()=>{
+  const vv=window.visualViewport;
+  if(!vv){TI.addEventListener('focus',()=>document.body.classList.add('term-typing'));TI.addEventListener('blur',()=>document.body.classList.remove('term-typing'));return}
+  let full=vv.height;   // the reference is the tallest viewport seen, so rotation and keyboard both work
+  vv.addEventListener('resize',()=>{const open=vv.height<full-150;if(!open)full=Math.max(full,vv.height);document.body.classList.toggle('kb-open',open)},{passive:true});
+})();
 // commands run one after another (FIFO), never interleaved
 let cmdChain=Promise.resolve();
 $('#tf').onsubmit=e=>{
