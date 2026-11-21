@@ -1011,15 +1011,13 @@ addEventListener('keydown',e=>{
 })();
 // DESKTOP POSTER: the hero video's poster comes from CONFIG.hero.posterDesktop (set after CONFIG exists)
 (()=>{const v=$('#bgv');if(v&&CONFIG.hero&&CONFIG.hero.posterDesktop)v.poster=CONFIG.hero.posterDesktop})();
-// BACK TO TOP: an IntersectionObserver on the sentinel says "far enough" (works regardless of scroll events).
-// The button appears only after the page has stopped moving, and hides while it moves.
+// BACK TO TOP: shown as soon as the page is scrolled past the sentinel (900 px down). One observer, no scroll listener.
 (()=>{
   const b=$('#totop'),sent=$('#top-sentinel');
   if(!b||!sent)return;
-  let far=false,idle=null;
-  new IntersectionObserver(es=>{far=!es[0].isIntersecting&&es[0].boundingClientRect.top<0},{threshold:0}).observe(sent);
-  const reveal=()=>b.classList.toggle('on',far);
-  addEventListener('scroll',()=>{b.classList.remove('on');clearTimeout(idle);idle=setTimeout(reveal,650)},{passive:true});
+  new IntersectionObserver(es=>{
+    b.classList.toggle('on', !es[0].isIntersecting && es[0].boundingClientRect.top<0);
+  },{threshold:0}).observe(sent);
   b.addEventListener('click',()=>scrollTo({top:0,behavior:RM?'auto':'smooth'}));
 })();
 function openRel(t,u,l,r){
@@ -1400,14 +1398,19 @@ function whoamiLine(){
   return `[USER: ${user}] // [ACCESS: ${pick(['GUEST','OBSERVER','VISITOR'])}] // [LOCATION: ${pick(['UNKNOWN','MASKED','ROUTED'])}] // [TRACE: MASKED]`;
 }
 // on phones the music bar and its playlist step aside while the keyboard is open (the keyboard needs the room)
-// PHONE KEYBOARD: while the on-screen keyboard is open the music bar steps aside, and returns when it closes.
-// Keyboard state comes from the visual viewport, so it also works when the input keeps focus after Back is pressed.
-(()=>{
-  const vv=window.visualViewport;
-  if(!vv){TI.addEventListener('focus',()=>document.body.classList.add('term-typing'));TI.addEventListener('blur',()=>document.body.classList.remove('term-typing'));return}
-  let full=vv.height;   // the reference is the tallest viewport seen, so rotation and keyboard both work
-  vv.addEventListener('resize',()=>{const open=vv.height<full-150;if(!open)full=Math.max(full,vv.height);document.body.classList.toggle('kb-open',open)},{passive:true});
-})();
+// PHONE KEYBOARD (kb-open): while the on-screen keyboard is open the music bar steps aside.
+if (window.visualViewport) {
+  const vv = window.visualViewport;
+  const setKb = () => {
+    const open = (window.innerHeight - vv.height) > 120;
+    document.body.classList.toggle('kb-open', open);
+  };
+  vv.addEventListener('resize', setKb, {passive:true});
+  vv.addEventListener('scroll', setKb, {passive:true});
+} else {
+  TI.addEventListener('focus',()=>document.body.classList.add('term-typing'));
+  TI.addEventListener('blur',()=>document.body.classList.remove('term-typing'));
+}
 // commands run one after another (FIFO), never interleaved
 let cmdChain=Promise.resolve();
 $('#tf').onsubmit=e=>{
