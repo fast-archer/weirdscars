@@ -14,7 +14,6 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#000000">
-<link rel="apple-touch-icon" href="assets/favicon.png">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- CSP NOTE: 'unsafe-inline' is allowed for scripts and styles because this site is a single HTML file
      with inline code. It is a known weakness: in a future refactor move the JS and CSS into separate files
@@ -884,7 +883,7 @@ function decrypt(ms=1600){
   H1.replaceChildren(...cs);
   // freeze each glyph's width while the random glyphs cycle (no reflow), release it when the title settles
   cs.forEach(s=>{const w=s.getBoundingClientRect().width;s.style.display='inline-block';s.style.width=w+'px';s.style.textAlign='center'});
-  setTimeout(()=>cs.forEach(s=>{s.style.width='';s.style.display='';s.style.textAlign=''}),ms+80);
+  setTimeout(()=>{H1.textContent=FINAL},ms+80); // back to plain text after the animation (per-letter spans are not needed then)
   const t0=performance.now();
   const tick=()=>{const p=(performance.now()-t0)/ms;let left=0;
     cs.forEach((s,i)=>{if(FINAL[i]===' ')return;if(p>=(i+1)/cs.length*.85){s.textContent=FINAL[i];s.style.fontFamily=''}else{left++;s.textContent=GLY[Math.random()*GLY.length|0]}});
